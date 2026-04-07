@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import AppShell from "@/components/layout/AppShell";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "LibraryOS",
@@ -16,8 +17,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         color: "#f0ece4",
         fontFamily: "DM Sans, sans-serif",
       }}>
-        <AppShell>{children}</AppShell>
-      </body>
+        <AuthProvider>
+          <AppShell>{children}</AppShell>
+        </AuthProvider>
+        </body>
     </html>
   );
 }
