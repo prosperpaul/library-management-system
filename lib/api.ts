@@ -69,7 +69,7 @@
 //   // same pattern for put and delete...
 // };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://library-system-jwtz.onrender.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 const getToken = () => {
   if (typeof window !== "undefined") {
