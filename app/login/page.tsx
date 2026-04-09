@@ -7,25 +7,25 @@ import { useAuth } from "@/context/AuthContext";
 
 const inputStyle: React.CSSProperties = {
   width: "100%", background: "#1c202c",
-  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px",
-  padding: "10px 12px", color: "#f0ece4", fontSize: "14px",
+  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "10px",
+  padding: "12px 14px", color: "#f0ece4", fontSize: "14px",
   outline: "none", fontFamily: "inherit", boxSizing: "border-box",
 };
 
 const labelStyle: React.CSSProperties = {
   display: "block", fontSize: "11px", color: "#5a5f78",
-  textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px", fontWeight: 600,
+  textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600,
 };
 
 function EyeIcon({ open }: { open: boolean }) {
   return open ? (
-    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+    <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
       <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
       <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>
       <line x1="1" y1="1" x2="23" y2="23"/>
     </svg>
   ) : (
-    <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+    <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
       <circle cx="12" cy="12" r="3"/>
     </svg>
@@ -64,28 +64,46 @@ export default function LoginPage() {
     }}>
       <div className="anim-fade-up" style={{
         background: "#14171f", border: "1px solid rgba(255,255,255,0.08)",
-        borderRadius: "20px", padding: "40px 36px", width: "380px", maxWidth: "100%",
-        boxShadow: "0 24px 64px rgba(0,0,0,0.4)",
+        borderRadius: "24px", padding: "44px 40px", width: "400px", maxWidth: "100%",
+        boxShadow: "0 32px 80px rgba(0,0,0,0.5)",
       }}>
 
-        <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "14px", background: "rgba(200,169,110,0.12)", border: "1px solid rgba(200,169,110,0.2)", marginBottom: "16px" }}>
-            <svg width="22" height="22" fill="none" stroke="#c8a96e" strokeWidth="1.8" viewBox="0 0 24 24">
-              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+        {/* Logo */}
+        <div style={{ textAlign: "center", marginBottom: "36px" }}>
+          <div style={{
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+            width: "56px", height: "56px", borderRadius: "16px",
+            background: "linear-gradient(135deg, rgba(200,169,110,0.2), rgba(200,169,110,0.06))",
+            border: "1px solid rgba(200,169,110,0.25)", marginBottom: "18px",
+          }}>
+            <svg width="24" height="24" fill="none" stroke="#c8a96e" strokeWidth="1.7" viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
             </svg>
           </div>
-          <div style={{ fontFamily: "serif", fontSize: "26px", color: "#c8a96e", letterSpacing: "0.5px" }}>LibraryOS</div>
-          <div style={{ fontSize: "13px", color: "#5a5f78", marginTop: "4px" }}>School Library Management System</div>
+          <div style={{ fontFamily: "serif", fontSize: "28px", color: "#f0ece4", letterSpacing: "0.3px", marginBottom: "6px" }}>
+            Welcome back
+          </div>
+          <div style={{ fontSize: "13px", color: "#5a5f78" }}>Sign in to your LibraryOS account</div>
         </div>
 
+        {/* Error */}
         {error && (
-          <div className="anim-slide-down" style={{ background: "rgba(224,85,85,0.1)", border: "1px solid rgba(224,85,85,0.25)", borderRadius: "8px", padding: "10px 14px", marginBottom: "18px", color: "#f07070", fontSize: "13px" }}>
+          <div className="anim-slide-down" style={{
+            background: "rgba(224,85,85,0.08)", border: "1px solid rgba(224,85,85,0.2)",
+            borderRadius: "10px", padding: "11px 14px", marginBottom: "20px",
+            color: "#f07070", fontSize: "13px", display: "flex", alignItems: "center", gap: "8px",
+          }}>
+            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
             {error}
           </div>
         )}
 
-        <div style={{ marginBottom: "16px" }}>
-          <label style={labelStyle}>Email</label>
+        {/* Email */}
+        <div style={{ marginBottom: "18px" }}>
+          <label style={labelStyle}>Email address</label>
           <input
             type="email" value={email} placeholder="admin@school.edu"
             onChange={(e) => setEmail(e.target.value)}
@@ -94,47 +112,75 @@ export default function LoginPage() {
           />
         </div>
 
-        <div style={{ marginBottom: "26px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
+        {/* Password */}
+        <div style={{ marginBottom: "10px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "7px" }}>
             <label style={{ ...labelStyle, marginBottom: 0 }}>Password</label>
-            <Link href="/forgot-password" style={{ fontSize: "11px", color: "#c8a96e", textDecoration: "none", fontWeight: 500 }}>
+            <Link href="/forgot-password" style={{ fontSize: "12px", color: "#c8a96e", textDecoration: "none", fontWeight: 500 }}>
               Forgot password?
             </Link>
           </div>
           <div style={{ position: "relative" }}>
             <input
               type={showPassword ? "text" : "password"} value={password}
-              placeholder="••••••••"
+              placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-              style={{ ...inputStyle, paddingRight: "44px" }}
+              style={{ ...inputStyle, paddingRight: "46px" }}
             />
             <button
               onClick={() => setShowPassword(s => !s)}
-              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#5a5f78", cursor: "pointer", padding: "2px", display: "flex", alignItems: "center" }}
+              style={{ position: "absolute", right: "13px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#5a5f78", cursor: "pointer", padding: "4px", display: "flex", alignItems: "center" }}
             >
               <EyeIcon open={showPassword} />
             </button>
           </div>
         </div>
 
+        {/* Sign in button */}
         <button
           onClick={handleLogin} disabled={loading}
           className="btn-primary"
           style={{
-            width: "100%", padding: "12px", background: "#c8a96e",
-            color: "#0f1117", border: "none", borderRadius: "10px",
+            width: "100%", padding: "13px", background: "#c8a96e",
+            color: "#0f1117", border: "none", borderRadius: "12px",
             fontSize: "15px", fontWeight: 700, cursor: loading ? "not-allowed" : "pointer",
             fontFamily: "inherit", opacity: loading ? 0.7 : 1, transition: "all 0.2s",
+            marginTop: "24px",
           }}
         >
-          {loading ? "Signing in..." : "Sign in →"}
+          {loading ? "Signing in..." : "Sign in"}
         </button>
 
-        <p style={{ textAlign: "center", fontSize: "13px", color: "#5a5f78", marginTop: "22px" }}>
-          No account?{" "}
-          <Link href="/register" style={{ color: "#c8a96e", textDecoration: "none", fontWeight: 500 }}>Create one</Link>
-        </p>
+        {/* Divider */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "22px 0" }}>
+          <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.06)" }} />
+          <span style={{ fontSize: "12px", color: "#3a3f52" }}>or</span>
+          <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.06)" }} />
+        </div>
+
+        {/* Create account button */}
+        <Link href="/register" style={{ textDecoration: "none" }}>
+          <button style={{
+            width: "100%", padding: "13px",
+            background: "transparent",
+            color: "#c8a96e", border: "1px solid rgba(200,169,110,0.3)", borderRadius: "12px",
+            fontSize: "15px", fontWeight: 600, cursor: "pointer",
+            fontFamily: "inherit", transition: "all 0.2s",
+          }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = "rgba(200,169,110,0.07)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(200,169,110,0.5)";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(200,169,110,0.3)";
+            }}
+          >
+            Create an account
+          </button>
+        </Link>
+
       </div>
     </main>
   );

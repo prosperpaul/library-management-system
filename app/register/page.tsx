@@ -69,6 +69,7 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const strength = checkPassword(form.password);
   const allPassed = Object.values(strength).every(Boolean);
@@ -180,16 +181,25 @@ export default function RegisterPage() {
 
         <div style={{ marginBottom: "26px" }}>
           <label style={labelStyle}>Confirm Password</label>
-          <input
-            type="password" placeholder="Repeat your password" value={form.confirmPassword}
-            onChange={(e) => setForm(f => ({ ...f, confirmPassword: e.target.value }))}
-            style={{
-              ...inputStyle,
-              borderColor: form.confirmPassword
-                ? passwordsMatch ? "rgba(76,175,130,0.45)" : "rgba(224,85,85,0.45)"
-                : "rgba(255,255,255,0.07)",
-            }}
-          />
+          <div style={{ position: "relative" }}>
+            <input
+              type={showConfirmPassword ? "text" : "password"} placeholder="Repeat your password" value={form.confirmPassword}
+              onChange={(e) => setForm(f => ({ ...f, confirmPassword: e.target.value }))}
+              style={{
+                ...inputStyle,
+                paddingRight: "46px",
+                borderColor: form.confirmPassword
+                  ? passwordsMatch ? "rgba(76,175,130,0.45)" : "rgba(224,85,85,0.45)"
+                  : "rgba(255,255,255,0.07)",
+              }}
+            />
+            <button
+              onClick={() => setShowConfirmPassword(s => !s)}
+              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#5a5f78", cursor: "pointer", padding: "2px", display: "flex", alignItems: "center" }}
+            >
+              <EyeIcon open={showConfirmPassword} />
+            </button>
+          </div>
           {form.confirmPassword.length > 0 && (
             <div style={{ marginTop: "6px", fontSize: "12px", color: passwordsMatch ? "#4caf82" : "#e05555", display: "flex", alignItems: "center", gap: "5px" }}>
               <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
