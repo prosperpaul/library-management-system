@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
+import MenuButton from "@/components/ui/MenuButton";
 import { useAuth } from "@/context/AuthContext";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
@@ -59,9 +60,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       <main style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", minWidth: 0 }}>
         {isMobile && (
-          <div style={{ padding: "0 16px", height: "56px", display: "flex", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.07)", background: "#0f1117", flexShrink: 0 }}>
-            <button onClick={() => setSidebarOpen(true)} style={{ background: "none", border: "none", color: "#f0ece4", cursor: "pointer", fontSize: "22px", padding: "4px" }}>☰</button>
-            <span style={{ fontFamily: "serif", fontSize: "18px", color: "#c8a96e", marginLeft: "12px" }}>LibraryOS</span>
+          <div style={{ padding: "0 16px", height: "56px", display: "flex", alignItems: "center", gap: "12px", borderBottom: "1px solid rgba(255,255,255,0.07)", background: "#0f1117", flexShrink: 0 }}>
+            <MenuButton open={sidebarOpen} onClick={() => setSidebarOpen(o => !o)} />
+            <span style={{ fontFamily: "serif", fontSize: "18px", color: "#c8a96e" }}>LibraryOS</span>
           </div>
         )}
         {children}
