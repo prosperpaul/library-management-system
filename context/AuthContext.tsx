@@ -8,6 +8,7 @@ interface User {
   id: string;
   name: string;
   email: string;
+  role: "admin" | "attendant";
 }
 
 interface AuthContextType {
@@ -40,10 +41,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const data = await api.post("/auth/login", { email, password }, false);
       if (data.token) {
+        const user = {
+          id: data._id,
+          name: data.name,
+          email: data.email,
+          role: data.role || "attendant",
+        };
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user || { email }));
+        localStorage.setItem("user", JSON.stringify(user));
         setToken(data.token);
-        setUser(data.user || { email, id: "", name: email.split("@")[0] });
+        setUser(user);
         return null;
       }
       return data.message || "Invalid credentials";

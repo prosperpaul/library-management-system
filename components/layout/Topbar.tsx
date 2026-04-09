@@ -1,66 +1,17 @@
-// "use client";
-
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-
-// interface TopbarProps {
-//   title: string;
-//   onAdd?: () => void;
-//   addLabel?: string;
-// }
-
-// export default function Topbar({ title, onAdd, addLabel = "+ Add New" }: TopbarProps) {
-//   const [query, setQuery] = useState("");
-//   const router = useRouter();
-
-//   return (
-//     <div style={{
-//       padding: "0 28px", height: "64px", display: "flex", alignItems: "center",
-//       justifyContent: "space-between", borderBottom: "1px solid rgba(255,255,255,0.07)",
-//       background: "#0f1117", flexShrink: 0,
-//     }}>
-//       <h1 style={{ fontFamily: "serif", fontSize: "22px", color: "#f0ece4" }}>{title}</h1>
-//       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-//         <div style={{
-//           display: "flex", alignItems: "center", gap: "8px",
-//           background: "#14171f", border: "1px solid rgba(255,255,255,0.07)",
-//           borderRadius: "10px", padding: "8px 14px", width: "220px",
-//         }}>
-//           <svg width="14" height="14" fill="none" stroke="#5a5f78" strokeWidth="2" viewBox="0 0 24 24">
-//             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-//           </svg>
-//           <input
-//             value={query}
-//             onChange={(e) => setQuery(e.target.value)}
-//             placeholder="Search..."
-//             style={{ background: "none", border: "none", outline: "none", fontSize: "13px", color: "#f0ece4", width: "100%", fontFamily: "inherit" }}
-//           />
-//         </div>
-//         {onAdd && (
-//           <button onClick={onAdd} style={{
-//             display: "inline-flex", alignItems: "center", gap: "6px",
-//             padding: "8px 16px", borderRadius: "9px", fontSize: "13px", fontWeight: 500,
-//             background: "#c8a96e", color: "#0f1117", border: "none", cursor: "pointer", fontFamily: "inherit",
-//           }}>
-//             {addLabel}
-//           </button>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 interface TopbarProps {
   title: string;
+  subtitle?: string;
   onAdd?: () => void;
   addLabel?: string;
 }
 
-export default function Topbar({ title, onAdd, addLabel = "+ Add New" }: TopbarProps) {
+export default function Topbar({ title, subtitle, onAdd, addLabel = "+ Add New" }: TopbarProps) {
+  const { user } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -73,33 +24,84 @@ export default function Topbar({ title, onAdd, addLabel = "+ Add New" }: TopbarP
   return (
     <div style={{
       padding: isMobile ? "0 16px" : "0 28px",
-      height: "64px", display: "flex", alignItems: "center",
+      height: "64px",
+      display: "flex",
+      alignItems: "center",
       justifyContent: "space-between",
       borderBottom: "1px solid rgba(255,255,255,0.07)",
-      background: "#0f1117", flexShrink: 0,
+      background: "#0f1117",
+      flexShrink: 0,
+      gap: "12px",
     }}>
-      <h1 style={{ fontFamily: "serif", fontSize: isMobile ? "18px" : "22px", color: "#f0ece4" }}>{title}</h1>
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      {/* Left: title + subtitle */}
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", minWidth: 0 }}>
+        <h1 style={{
+          fontFamily: "serif",
+          fontSize: isMobile ? "18px" : "22px",
+          color: "#f0ece4",
+          whiteSpace: "nowrap",
+        }}>
+          {title}
+        </h1>
+        {subtitle && !isMobile && (
+          <span style={{
+            fontSize: "12px", color: "#5a5f78",
+            background: "rgba(255,255,255,0.04)",
+            border: "1px solid rgba(255,255,255,0.06)",
+            padding: "2px 10px", borderRadius: "20px",
+          }}>
+            {subtitle}
+          </span>
+        )}
+      </div>
 
-        {/* Search — hidden on mobile */}
-        {!isMobile && (
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "10px", padding: "8px 14px", width: "220px" }}>
-            <svg width="14" height="14" fill="none" stroke="#5a5f78" strokeWidth="2" viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-            <input placeholder="Search..." style={{ background: "none", border: "none", outline: "none", fontSize: "13px", color: "#f0ece4", width: "100%", fontFamily: "inherit" }} />
+      {/* Right: role badge + add button */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
+        {!isMobile && user && (
+          <div style={{
+            display: "flex", alignItems: "center", gap: "6px",
+            padding: "4px 12px", borderRadius: "20px", fontSize: "11px",
+            fontWeight: 600, letterSpacing: "0.5px",
+            background: user.role === "admin" ? "rgba(200,169,110,0.1)" : "rgba(90,141,238,0.1)",
+            border: `1px solid ${user.role === "admin" ? "rgba(200,169,110,0.2)" : "rgba(90,141,238,0.2)"}`,
+            color: user.role === "admin" ? "#c8a96e" : "#5a8dee",
+          }}>
+            {user.role === "admin" ? (
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ) : (
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 00-16 0"/>
+              </svg>
+            )}
+            {user.role === "admin" ? "Admin" : "Attendant"}
           </div>
         )}
 
         {onAdd && (
-          <button onClick={onAdd} style={{
-            display: "inline-flex", alignItems: "center", gap: "6px",
-            padding: isMobile ? "7px 12px" : "8px 16px",
-            borderRadius: "9px", fontSize: isMobile ? "12px" : "13px",
-            fontWeight: 500, background: "#c8a96e", color: "#0f1117",
-            border: "none", cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
-          }}>
-            {isMobile ? "+" : addLabel}
+          <button
+            onClick={onAdd}
+            className="btn-primary"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "6px",
+              padding: isMobile ? "7px 14px" : "8px 18px",
+              borderRadius: "9px",
+              fontSize: isMobile ? "13px" : "13px",
+              fontWeight: 600,
+              background: "#c8a96e",
+              color: "#0f1117",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: "inherit",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {isMobile ? (
+              <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            ) : addLabel}
           </button>
         )}
       </div>

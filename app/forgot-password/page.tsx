@@ -1,83 +1,15 @@
-// "use client";
-
-// import { useState } from "react";
-// import Link from "next/link";
-
-// export default function ForgotPasswordPage() {
-//   const [email, setEmail] = useState("");
-//   const [submitted, setSubmitted] = useState(false);
-//   const [loading, setLoading] = useState(false);
-
-//   const handleSubmit = async () => {
-//     if (!email) return;
-//     setLoading(true);
-//     // When you add a reset endpoint to your backend, call it here:
-//     // await api.post("/auth/forgot-password", { email }, false);
-//     await new Promise(r => setTimeout(r, 1000)); // simulate delay
-//     setSubmitted(true);
-//     setLoading(false);
-//   };
-
-//   return (
-//     <main style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", background: "#0f1117", padding: "20px" }}>
-//       <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "40px", width: "380px", maxWidth: "100%" }}>
-
-//         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-//           <h1 style={{ fontFamily: "serif", fontSize: "28px", color: "#c8a96e", marginBottom: "4px" }}>LibraryOS</h1>
-//           <p style={{ fontSize: "13px", color: "#5a5f78" }}>Reset your password</p>
-//         </div>
-
-//         {!submitted ? (
-//           <>
-//             <p style={{ fontSize: "14px", color: "#8a8fa8", marginBottom: "24px", lineHeight: 1.6 }}>
-//               Enter the email address linked to your account and we'll send you a reset link.
-//             </p>
-
-//             <div style={{ marginBottom: "20px" }}>
-//               <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px" }}>
-//                 Email Address
-//               </label>
-//               <input
-//                 type="email"
-//                 placeholder="admin@school.edu"
-//                 value={email}
-//                 onChange={(e) => setEmail(e.target.value)}
-//                 style={{ width: "100%", background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px", padding: "10px 12px", color: "#f0ece4", fontSize: "14px", outline: "none", fontFamily: "inherit", boxSizing: "border-box" }}
-//               />
-//             </div>
-
-//             <button
-//               onClick={handleSubmit}
-//               disabled={loading || !email}
-//               style={{ width: "100%", padding: "12px", background: email ? "#c8a96e" : "#2a2d3a", color: email ? "#0f1117" : "#5a5f78", border: "none", borderRadius: "10px", fontSize: "15px", fontWeight: 600, cursor: email ? "pointer" : "not-allowed", fontFamily: "inherit" }}
-//             >
-//               {loading ? "Sending..." : "Send Reset Link →"}
-//             </button>
-//           </>
-//         ) : (
-//           <div style={{ textAlign: "center" }}>
-//             <div style={{ fontSize: "48px", marginBottom: "16px" }}>📬</div>
-//             <h2 style={{ fontSize: "18px", color: "#f0ece4", marginBottom: "8px" }}>Check your email</h2>
-//             <p style={{ fontSize: "14px", color: "#8a8fa8", lineHeight: 1.6 }}>
-//               If an account exists for <strong style={{ color: "#c8a96e" }}>{email}</strong>, a password reset link has been sent.
-//             </p>
-//           </div>
-//         )}
-
-//         <p style={{ textAlign: "center", fontSize: "13px", color: "#5a5f78", marginTop: "24px" }}>
-//           Remember your password?{" "}
-//           <Link href="/login" style={{ color: "#c8a96e", textDecoration: "none" }}>Back to login</Link>
-//         </p>
-//       </div>
-//     </main>
-//   );
-// }
-
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
 import { api } from "@/lib/api";
+
+const inputStyle: React.CSSProperties = {
+  width: "100%", background: "#1c202c",
+  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px",
+  padding: "10px 12px", color: "#f0ece4", fontSize: "14px",
+  outline: "none", fontFamily: "inherit", boxSizing: "border-box",
+};
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -86,62 +18,104 @@ export default function ForgotPasswordPage() {
   const [error, setError] = useState("");
 
   const handleSubmit = async () => {
+    if (!email.trim()) { setError("Please enter your email address."); return; }
     setLoading(true);
     setError("");
     try {
-      await api.post("/auth/forgot-password", { email });
+      await api.post("/auth/forgot-password", { email }, false);
       setSubmitted(true);
     } catch {
-      setError("Could not connect to server");
+      setError("Could not connect to server. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", background: "#0f1117" }}>
-      <div style={{ background: "#1a1d27", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "40px", width: "360px" }}>
-        <h1 style={{ fontFamily: "serif", fontSize: "28px", color: "#c8a96e", textAlign: "center", marginBottom: "4px" }}>LibraryOS</h1>
-        <p style={{ fontSize: "13px", color: "#5a5f78", textAlign: "center", marginBottom: "32px" }}>Reset your password</p>
+    <main style={{
+      display: "flex", alignItems: "center", justifyContent: "center",
+      minHeight: "100vh", padding: "20px",
+      background: "#0f1117",
+      backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)",
+      backgroundSize: "28px 28px",
+    }}>
+      <div className="anim-fade-up" style={{
+        background: "#14171f", border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: "20px", padding: "40px 36px", width: "380px", maxWidth: "100%",
+        boxShadow: "0 24px 64px rgba(0,0,0,0.4)",
+      }}>
+
+        <div style={{ textAlign: "center", marginBottom: "30px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "14px", background: "rgba(200,169,110,0.12)", border: "1px solid rgba(200,169,110,0.2)", marginBottom: "16px" }}>
+            <svg width="22" height="22" fill="none" stroke="#c8a96e" strokeWidth="1.8" viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+            </svg>
+          </div>
+          <div style={{ fontFamily: "serif", fontSize: "26px", color: "#c8a96e", letterSpacing: "0.5px" }}>LibraryOS</div>
+          <div style={{ fontSize: "13px", color: "#5a5f78", marginTop: "4px" }}>Reset your password</div>
+        </div>
 
         {submitted ? (
-          <div style={{ textAlign: "center" }}>
-            <div style={{ fontSize: "48px", marginBottom: "16px" }}>📬</div>
-            <p style={{ color: "#f0ece4", fontSize: "16px", fontWeight: 600, marginBottom: "8px" }}>Check your email</p>
-            <p style={{ color: "#5a5f78", fontSize: "13px" }}>
-              If an account exists for <span style={{ color: "#c8a96e" }}>{email}</span>, a password reset link has been sent.
-            </p>
+          <div style={{ textAlign: "center", padding: "10px 0" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "64px", height: "64px", borderRadius: "50%", background: "rgba(76,175,130,0.12)", border: "1px solid rgba(76,175,130,0.25)", marginBottom: "20px" }}>
+              <svg width="28" height="28" fill="none" stroke="#4caf82" strokeWidth="1.8" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0ece4", marginBottom: "10px" }}>Check your email</div>
+            <div style={{ fontSize: "13px", color: "#5a5f78", lineHeight: 1.7 }}>
+              If an account exists for{" "}
+              <span style={{ color: "#c8a96e", fontWeight: 500 }}>{email}</span>,
+              {" "}a password reset link has been sent.
+            </div>
           </div>
         ) : (
           <>
-            {error && <p style={{ color: "#e05555", fontSize: "13px", marginBottom: "12px", textAlign: "center" }}>{error}</p>}
+            <p style={{ fontSize: "13px", color: "#8a8fa8", marginBottom: "24px", lineHeight: 1.7 }}>
+              Enter the email address linked to your account and we'll send you a reset link.
+            </p>
 
-            <div style={{ marginBottom: "20px" }}>
-              <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px" }}>Email</label>
+            {error && (
+              <div className="anim-slide-down" style={{ background: "rgba(224,85,85,0.1)", border: "1px solid rgba(224,85,85,0.25)", borderRadius: "8px", padding: "10px 14px", marginBottom: "18px", color: "#f07070", fontSize: "13px" }}>
+                {error}
+              </div>
+            )}
+
+            <div style={{ marginBottom: "22px" }}>
+              <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px", fontWeight: 600 }}>
+                Email Address
+              </label>
               <input
-                type="email"
-                value={email}
+                type="email" value={email} placeholder="admin@school.edu"
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="prosper@gmail.com"
-                style={{ width: "100%", background: "#232839", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px", padding: "10px 12px", color: "#f0ece4", fontSize: "14px", outline: "none" }}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                style={inputStyle}
               />
             </div>
 
             <button
-              onClick={handleSubmit}
-              disabled={loading}
-              style={{ width: "100%", padding: "12px", background: "#c8a96e", color: "#0f1117", border: "none", borderRadius: "10px", fontSize: "15px", fontWeight: 600, cursor: "pointer" }}
+              onClick={handleSubmit} disabled={loading || !email.trim()}
+              className="btn-primary"
+              style={{
+                width: "100%", padding: "12px",
+                background: email.trim() ? "#c8a96e" : "#2a2d3a",
+                color: email.trim() ? "#0f1117" : "#5a5f78",
+                border: "none", borderRadius: "10px", fontSize: "15px",
+                fontWeight: 700, cursor: email.trim() ? "pointer" : "not-allowed",
+                fontFamily: "inherit", transition: "all 0.2s",
+                opacity: loading ? 0.7 : 1,
+              }}
             >
-              {loading ? "Sending..." : "Send Reset Link"}
+              {loading ? "Sending..." : "Send Reset Link →"}
             </button>
           </>
         )}
 
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <Link href="/login" style={{ fontSize: "13px", color: "#5a5f78", textDecoration: "none" }}>
-            Remember your password? Back to login
-          </Link>
-        </div>
+        <p style={{ textAlign: "center", fontSize: "13px", color: "#5a5f78", marginTop: "24px" }}>
+          Remember your password?{" "}
+          <Link href="/login" style={{ color: "#c8a96e", textDecoration: "none", fontWeight: 500 }}>Back to sign in</Link>
+        </p>
       </div>
     </main>
   );
