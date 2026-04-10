@@ -13,7 +13,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const isAuthPage = pathname === "/login" || pathname === "/register" || pathname === "/forgot-password";
+  const isAuthPage = pathname === "/login" || pathname === "/register" || pathname === "/forgot-password" || pathname === "/logout";
 
   useEffect(() => {
     if (!loading && !token && !isAuthPage) {
