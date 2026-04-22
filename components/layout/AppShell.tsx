@@ -32,10 +32,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   useEffect(() => { setSidebarOpen(false); }, [pathname]);
 
   const splash = (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", background: "#0f1117" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", background: "var(--bg)" }}>
       <div style={{ textAlign: "center" }}>
         <div style={{ fontFamily: "serif", fontSize: "24px", color: "#c8a96e", marginBottom: "16px" }}>LibraryOS</div>
-        <div style={{ width: "24px", height: "24px", border: "2px solid rgba(255,255,255,0.1)", borderTopColor: "#c8a96e", borderRadius: "50%", animation: "spin 0.8s linear infinite", margin: "0 auto" }} />
+        <div style={{ width: "24px", height: "24px", border: "2px solid var(--border-hover)", borderTopColor: "#c8a96e", borderRadius: "50%", animation: "spin 0.8s linear infinite", margin: "0 auto" }} />
         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     </div>

@@ -29,8 +29,8 @@ export default function Modal({
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: "#14171f",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "var(--surface)",
+          border: "1px solid var(--border-hover)",
           borderRadius: "16px",
           width: "100%",
           maxWidth: "440px",
@@ -42,12 +42,12 @@ export default function Modal({
         {/* Header */}
         <div style={{
           padding: "20px 24px 16px",
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          borderBottom: "1px solid var(--border)",
           display: "flex", alignItems: "center", justifyContent: "space-between",
-          position: "sticky", top: 0, background: "#14171f", zIndex: 1,
+          position: "sticky", top: 0, background: "var(--surface)", zIndex: 1,
         }}>
-          <h2 style={{ fontFamily: "serif", fontSize: "18px", color: "#f0ece4", margin: 0 }}>{title}</h2>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: "#5a5f78", cursor: "pointer", fontSize: "20px", lineHeight: 1, padding: "4px" }}>✕</button>
+          <h2 style={{ fontFamily: "serif", fontSize: "18px", color: "var(--text)", margin: 0 }}>{title}</h2>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", fontSize: "20px", lineHeight: 1, padding: "4px" }}>✕</button>
         </div>
 
         {/* Body */}
@@ -56,18 +56,18 @@ export default function Modal({
         {/* Footer */}
         <div style={{
           padding: "16px 24px 20px",
-          borderTop: "1px solid rgba(255,255,255,0.07)",
+          borderTop: "1px solid var(--border)",
           display: "flex", justifyContent: "flex-end", gap: "10px",
-          position: "sticky", bottom: 0, background: "#14171f",
+          position: "sticky", bottom: 0, background: "var(--surface)",
         }}>
           <button onClick={onClose} style={{
-            background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)",
-            color: "#8a8fa8", padding: "8px 16px", borderRadius: "9px",
+            background: "var(--surface2)", border: "1px solid var(--border)",
+            color: "var(--text-muted)", padding: "8px 16px", borderRadius: "9px",
             cursor: "pointer", fontFamily: "inherit", fontSize: "13px",
           }}>Cancel</button>
           <button onClick={onSave} disabled={saving} style={{
-            background: saving ? "#2a2d3a" : "#c8a96e",
-            color: saving ? "#5a5f78" : "#0f1117",
+            background: saving ? "var(--surface3)" : "#c8a96e",
+            color: saving ? "var(--text-dim)" : "var(--bg)",
             padding: "8px 20px", borderRadius: "9px",
             border: "none", cursor: saving ? "not-allowed" : "pointer",
             fontFamily: "inherit", fontSize: "13px", fontWeight: 600,

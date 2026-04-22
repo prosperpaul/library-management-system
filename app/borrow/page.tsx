@@ -6,9 +6,9 @@ import { api } from "@/lib/api";
 import Toast from "@/components/ui/Toast";
 
 const inputStyle: React.CSSProperties = {
-  width: "100%", background: "#1c202c",
-  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px",
-  padding: "10px 12px", color: "#f0ece4", fontSize: "14px",
+  width: "100%", background: "var(--surface2)",
+  border: "1px solid var(--border)", borderRadius: "8px",
+  padding: "10px 12px", color: "var(--text)", fontSize: "14px",
   outline: "none", fontFamily: "inherit", boxSizing: "border-box",
 };
 
@@ -36,13 +36,13 @@ function SearchSelect({ options, value, onChange, placeholder, loading: optLoadi
         style={{ ...inputStyle, opacity: optLoading ? 0.5 : 1 }}
       />
       {open && (
-        <div style={{ position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, background: "#1c202c", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "9px", maxHeight: "200px", overflowY: "auto", zIndex: 200, boxShadow: "0 8px 32px rgba(0,0,0,0.35)" }}>
+        <div style={{ position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, background: "var(--surface2)", border: "1px solid var(--border-hover)", borderRadius: "9px", maxHeight: "200px", overflowY: "auto", zIndex: 200, boxShadow: "0 8px 32px rgba(0,0,0,0.35)" }}>
           {filtered.length === 0 ? (
-            <div style={{ padding: "12px", color: "#5a5f78", fontSize: "13px", textAlign: "center" }}>No results</div>
+            <div style={{ padding: "12px", color: "var(--text-dim)", fontSize: "13px", textAlign: "center" }}>No results</div>
           ) : filtered.map((o) => (
             <div key={o.id} onMouseDown={() => { onChange(o.id); setOpen(false); setSearch(""); }}
-              style={{ padding: "10px 14px", color: o.id === value ? "#c8a96e" : "#f0ece4", cursor: "pointer", fontSize: "13px", borderBottom: "1px solid rgba(255,255,255,0.04)", background: o.id === value ? "rgba(200,169,110,0.08)" : "transparent" }}
-              onMouseEnter={e => { if (o.id !== value) (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.04)"; }}
+              style={{ padding: "10px 14px", color: o.id === value ? "#c8a96e" : "var(--text)", cursor: "pointer", fontSize: "13px", borderBottom: "1px solid var(--hover-bg)", background: o.id === value ? "rgba(200,169,110,0.08)" : "transparent" }}
+              onMouseEnter={e => { if (o.id !== value) (e.currentTarget as HTMLDivElement).style.background = "var(--hover-bg)"; }}
               onMouseLeave={e => { if (o.id !== value) (e.currentTarget as HTMLDivElement).style.background = "transparent"; }}
             >
               {o.label}
@@ -176,9 +176,9 @@ export default function BorrowPage() {
             { label: "Active Loans",   value: active.length,   color: "#4caf82", bg: "rgba(76,175,130,0.1)" },
             { label: "Overdue",        value: overdue.length,  color: "#e05555", bg: "rgba(224,85,85,0.1)"  },
           ].map(({ label, value, color, bg }) => (
-            <div key={label} style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "12px", padding: "16px" }}>
-              <div style={{ fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px", fontWeight: 600 }}>{label}</div>
-              <div style={{ fontFamily: "serif", fontSize: "28px", color: loading ? "#5a5f78" : "#f0ece4" }}>
+            <div key={label} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "12px", padding: "16px" }}>
+              <div style={{ fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px", fontWeight: 600 }}>{label}</div>
+              <div style={{ fontFamily: "serif", fontSize: "28px", color: loading ? "var(--text-dim)" : "var(--text)" }}>
                 {loading ? "—" : value}
               </div>
               <div style={{ marginTop: "6px", display: "inline-block", padding: "2px 8px", borderRadius: "20px", fontSize: "10px", fontWeight: 600, background: bg, color }}>{label.split(" ")[0]}</div>
@@ -187,9 +187,9 @@ export default function BorrowPage() {
         </div>
 
         {/* Currently Borrowed */}
-        <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", overflow: "hidden", marginBottom: "18px" }}>
-          <div style={{ padding: "16px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ fontSize: "14px", fontWeight: 600, color: "#f0ece4" }}>Currently Borrowed</div>
+        <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", overflow: "hidden", marginBottom: "18px" }}>
+          <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>Currently Borrowed</div>
             <span style={{ padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: 600, background: "rgba(90,141,238,0.1)", color: "#5a8dee" }}>
               {loading ? "…" : active.length} active
             </span>
@@ -197,25 +197,25 @@ export default function BorrowPage() {
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", minWidth: "500px" }}>
               <thead>
-                <tr style={{ background: "rgba(255,255,255,0.02)" }}>
+                <tr style={{ background: "var(--hover-bg-soft)" }}>
                   {["Book", "Borrowed By", "Due Date", "Action"].map(h => (
-                    <th key={h} style={{ textAlign: "left", padding: "11px 14px", fontSize: "10.5px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1.2px", borderBottom: "1px solid rgba(255,255,255,0.07)", fontWeight: 600 }}>{h}</th>
+                    <th key={h} style={{ textAlign: "left", padding: "11px 14px", fontSize: "10.5px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1.2px", borderBottom: "1px solid var(--border)", fontWeight: 600 }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {loading ? <TableSkeleton cols={4} /> : active.length === 0 ? (
-                  <tr><td colSpan={4} style={{ padding: "40px 14px", textAlign: "center", color: "#5a5f78" }}>No active borrows.</td></tr>
+                  <tr><td colSpan={4} style={{ padding: "40px 14px", textAlign: "center", color: "var(--text-dim)" }}>No active borrows.</td></tr>
                 ) : active.map((book: any) => (
                   <tr key={book._id} className="table-row">
-                    <td style={{ padding: "13px 14px", color: "#f0ece4", fontWeight: 500, borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.title}</td>
-                    <td style={{ padding: "13px 14px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.borrowedBy?.name || "—"}</td>
-                    <td style={{ padding: "13px 14px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                      <span style={{ fontSize: "12px", color: "#8a8fa8" }}>
+                    <td style={{ padding: "13px 14px", color: "var(--text)", fontWeight: 500, borderBottom: "1px solid var(--hover-bg)" }}>{book.title}</td>
+                    <td style={{ padding: "13px 14px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.borrowedBy?.name || "—"}</td>
+                    <td style={{ padding: "13px 14px", borderBottom: "1px solid var(--hover-bg)" }}>
+                      <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
                         {book.returnDate ? new Date(book.returnDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "—"}
                       </span>
                     </td>
-                    <td style={{ padding: "13px 14px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                    <td style={{ padding: "13px 14px", borderBottom: "1px solid var(--hover-bg)" }}>
                       <button className="btn-success" onClick={() => handleReturn(book._id)}
                         style={{ background: "none", border: "1px solid rgba(76,175,130,0.3)", color: "#4caf82", padding: "4px 12px", borderRadius: "7px", fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>
                         Return
@@ -229,9 +229,9 @@ export default function BorrowPage() {
         </div>
 
         {/* Overdue */}
-        <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", overflow: "hidden" }}>
-          <div style={{ padding: "16px 20px", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ fontSize: "14px", fontWeight: 600, color: "#f0ece4" }}>Overdue Books</div>
+        <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", overflow: "hidden" }}>
+          <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>Overdue Books</div>
             <span style={{ padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: 600, background: overdue.length > 0 ? "rgba(224,85,85,0.12)" : "rgba(76,175,130,0.12)", color: overdue.length > 0 ? "#e05555" : "#4caf82" }}>
               {loading ? "…" : overdue.length} overdue
             </span>
@@ -239,25 +239,25 @@ export default function BorrowPage() {
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", minWidth: "500px" }}>
               <thead>
-                <tr style={{ background: "rgba(255,255,255,0.02)" }}>
+                <tr style={{ background: "var(--hover-bg-soft)" }}>
                   {["Book", "Borrowed By", "Was Due", "Action"].map(h => (
-                    <th key={h} style={{ textAlign: "left", padding: "11px 14px", fontSize: "10.5px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1.2px", borderBottom: "1px solid rgba(255,255,255,0.07)", fontWeight: 600 }}>{h}</th>
+                    <th key={h} style={{ textAlign: "left", padding: "11px 14px", fontSize: "10.5px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1.2px", borderBottom: "1px solid var(--border)", fontWeight: 600 }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {loading ? <TableSkeleton cols={4} /> : overdue.length === 0 ? (
-                  <tr><td colSpan={4} style={{ padding: "40px 14px", textAlign: "center", color: "#5a5f78" }}>All clear — no overdue books.</td></tr>
+                  <tr><td colSpan={4} style={{ padding: "40px 14px", textAlign: "center", color: "var(--text-dim)" }}>All clear — no overdue books.</td></tr>
                 ) : overdue.map((book: any) => (
                   <tr key={book._id} className="table-row">
-                    <td style={{ padding: "13px 14px", color: "#f0ece4", fontWeight: 500, borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.title}</td>
-                    <td style={{ padding: "13px 14px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.borrowedBy?.name || "—"}</td>
-                    <td style={{ padding: "13px 14px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                    <td style={{ padding: "13px 14px", color: "var(--text)", fontWeight: 500, borderBottom: "1px solid var(--hover-bg)" }}>{book.title}</td>
+                    <td style={{ padding: "13px 14px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.borrowedBy?.name || "—"}</td>
+                    <td style={{ padding: "13px 14px", borderBottom: "1px solid var(--hover-bg)" }}>
                       <span style={{ fontSize: "12px", color: "#e05555", fontWeight: 500 }}>
                         {book.returnDate ? new Date(book.returnDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "—"}
                       </span>
                     </td>
-                    <td style={{ padding: "13px 14px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                    <td style={{ padding: "13px 14px", borderBottom: "1px solid var(--hover-bg)" }}>
                       <button className="btn-success" onClick={() => handleReturn(book._id)}
                         style={{ background: "none", border: "1px solid rgba(76,175,130,0.3)", color: "#4caf82", padding: "4px 12px", borderRadius: "7px", fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>
                         Mark Returned
@@ -276,11 +276,11 @@ export default function BorrowPage() {
       {showModal && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.72)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100, backdropFilter: "blur(4px)" }}
           onClick={() => setShowModal(false)}>
-          <div className="anim-scale-in modal-inner" style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "18px", width: "480px" }}
+          <div className="anim-scale-in modal-inner" style={{ background: "var(--surface)", border: "1px solid var(--border-hover)", borderRadius: "18px", width: "480px" }}
             onClick={(e) => e.stopPropagation()}>
-            <div style={{ padding: "22px 26px 16px", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h2 style={{ fontSize: "19px", color: "#f0ece4" }}>Borrow a Book</h2>
-              <button onClick={() => setShowModal(false)} style={{ background: "none", border: "none", color: "#5a5f78", cursor: "pointer", fontSize: "20px" }}>✕</button>
+            <div style={{ padding: "22px 26px 16px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <h2 style={{ fontSize: "19px", color: "var(--text)" }}>Borrow a Book</h2>
+              <button onClick={() => setShowModal(false)} style={{ background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", fontSize: "20px" }}>✕</button>
             </div>
             <div style={{ padding: "20px 26px" }}>
               {formError && (
@@ -290,7 +290,7 @@ export default function BorrowPage() {
               )}
 
               <div style={{ marginBottom: "16px" }}>
-                <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Book <span style={{ color: "#e05555" }}>*</span></label>
+                <label style={{ display: "block", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Book <span style={{ color: "#e05555" }}>*</span></label>
                 <SearchSelect options={availableBooks} value={form.bookId}
                   onChange={(id) => setForm(f => ({ ...f, bookId: id }))}
                   placeholder="Search available books..." loading={dropdownsLoading} />
@@ -300,31 +300,31 @@ export default function BorrowPage() {
               </div>
 
               <div style={{ marginBottom: "16px" }}>
-                <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Student <span style={{ color: "#e05555" }}>*</span></label>
+                <label style={{ display: "block", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Student <span style={{ color: "#e05555" }}>*</span></label>
                 <SearchSelect options={students} value={form.studentId}
                   onChange={(id) => setForm(f => ({ ...f, studentId: id }))}
                   placeholder="Search students..." loading={dropdownsLoading} />
               </div>
 
               <div style={{ marginBottom: "16px" }}>
-                <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Attendant <span style={{ color: "#e05555" }}>*</span></label>
+                <label style={{ display: "block", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Attendant <span style={{ color: "#e05555" }}>*</span></label>
                 <SearchSelect options={attendants} value={form.attendantId}
                   onChange={(id) => setForm(f => ({ ...f, attendantId: id }))}
                   placeholder="Search attendants..." loading={dropdownsLoading} />
               </div>
 
               <div style={{ marginBottom: "4px" }}>
-                <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Return Date <span style={{ color: "#e05555" }}>*</span></label>
+                <label style={{ display: "block", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>Return Date <span style={{ color: "#e05555" }}>*</span></label>
                 <input type="date" min={today} value={form.returnDate}
                   onChange={(e) => setForm(f => ({ ...f, returnDate: e.target.value }))}
                   style={{ ...inputStyle, colorScheme: "dark" }} />
               </div>
             </div>
-            <div style={{ padding: "14px 26px 22px", borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+            <div style={{ padding: "14px 26px 22px", borderTop: "1px solid var(--border)", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
               <button onClick={() => setShowModal(false)} className="btn-secondary"
-                style={{ background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)", color: "#8a8fa8", padding: "9px 18px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", fontWeight: 500 }}>Cancel</button>
+                style={{ background: "var(--surface2)", border: "1px solid var(--border)", color: "var(--text-muted)", padding: "9px 18px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", fontWeight: 500 }}>Cancel</button>
               <button onClick={handleBorrow} disabled={submitting} className="btn-primary"
-                style={{ background: "#c8a96e", color: "#0f1117", padding: "9px 22px", borderRadius: "9px", border: "none", fontFamily: "inherit", fontSize: "13px", fontWeight: 700, opacity: submitting ? 0.7 : 1 }}>
+                style={{ background: "#c8a96e", color: "var(--bg)", padding: "9px 22px", borderRadius: "9px", border: "none", fontFamily: "inherit", fontSize: "13px", fontWeight: 700, opacity: submitting ? 0.7 : 1 }}>
                 {submitting ? "Processing..." : "Confirm Borrow →"}
               </button>
             </div>

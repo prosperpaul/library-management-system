@@ -93,7 +93,7 @@ library-system-client/
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone <https://github.com/prosperpaul/library-management-system>
 cd library-system-client
 
 # Install dependencies
@@ -158,12 +158,4 @@ pnpm start
 
 ---
 
-## Screenshots
-
-> Add screenshots of the Dashboard, Books page, and Borrow page here for best portfolio impact.
-
----
-
-## License
-
-MIT
+Author **Chiamaka Prosper Nkwazema**

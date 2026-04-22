@@ -28,7 +28,7 @@ function DesktopStat({ label, value, sub, dotColor, loading }: {
 }) {
   if (loading) {
     return (
-      <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px" }}>
+      <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: "20px" }}>
         <div className="skeleton" style={{ height: "11px", width: "55%", marginBottom: "14px" }} />
         <div className="skeleton" style={{ height: "34px", width: "45%", marginBottom: "12px" }} />
         <div className="skeleton" style={{ height: "11px", width: "60%" }} />
@@ -36,10 +36,10 @@ function DesktopStat({ label, value, sub, dotColor, loading }: {
     );
   }
   return (
-    <div className="stat-card" style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px" }}>
-      <div style={{ fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px", fontWeight: 600 }}>{label}</div>
-      <div style={{ fontFamily: "serif", fontSize: "34px", color: "#f0ece4", lineHeight: 1 }}>{value}</div>
-      <div style={{ fontSize: "12px", color: "#8a8fa8", marginTop: "10px", display: "flex", alignItems: "center", gap: "6px" }}>
+    <div className="stat-card" style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: "20px" }}>
+      <div style={{ fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px", fontWeight: 600 }}>{label}</div>
+      <div style={{ fontFamily: "serif", fontSize: "34px", color: "var(--text)", lineHeight: 1 }}>{value}</div>
+      <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "10px", display: "flex", alignItems: "center", gap: "6px" }}>
         <span style={{ display: "inline-block", width: "6px", height: "6px", borderRadius: "50%", background: dotColor, flexShrink: 0 }} />
         {sub}
       </div>
@@ -54,7 +54,7 @@ function MobileStatRow({ label, value, icon, tone = "default", loading }: {
   const isDanger = tone === "danger";
   if (loading) {
     return (
-      <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "14px", padding: "18px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "14px" }}>
+      <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: "18px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "14px" }}>
         <div style={{ flex: 1 }}>
           <div className="skeleton" style={{ height: "10px", width: "45%", marginBottom: "10px" }} />
           <div className="skeleton" style={{ height: "24px", width: "30%" }} />
@@ -65,20 +65,20 @@ function MobileStatRow({ label, value, icon, tone = "default", loading }: {
   }
   return (
     <div className="stat-card" style={{
-      background: isDanger ? "linear-gradient(100deg, #14171f, rgba(224,85,85,0.06))" : "#14171f",
-      border: `1px solid ${isDanger ? "rgba(224,85,85,0.18)" : "rgba(255,255,255,0.08)"}`,
+      background: isDanger ? "linear-gradient(100deg, var(--surface), rgba(224,85,85,0.06))" : "var(--surface)",
+      border: `1px solid ${isDanger ? "rgba(224,85,85,0.18)" : "var(--border)"}`,
       borderRadius: "14px", padding: "18px 20px",
       display: "flex", alignItems: "center", justifyContent: "space-between", gap: "14px",
     }}>
       <div style={{ minWidth: 0 }}>
         <div style={{
           fontSize: "10px", letterSpacing: "1.2px", fontWeight: 600,
-          color: isDanger ? "rgba(224,85,85,0.8)" : "#5a5f78",
+          color: isDanger ? "rgba(224,85,85,0.8)" : "var(--text-dim)",
           textTransform: "uppercase", marginBottom: "6px",
         }}>{label}</div>
         <div style={{
           fontFamily: "serif", fontSize: "26px", lineHeight: 1,
-          color: isDanger ? "#e05555" : "#f0ece4",
+          color: isDanger ? "#e05555" : "var(--text)",
         }}>{value}</div>
       </div>
       <div style={{
@@ -153,7 +153,7 @@ export default function DashboardPage() {
             <div style={{ fontSize: "11px", color: "#c8a96e", letterSpacing: "1.5px", textTransform: "uppercase", fontWeight: 600, marginBottom: "6px" }}>
               Dashboard
             </div>
-            <div style={{ fontFamily: "serif", fontSize: "28px", color: "#f0ece4", lineHeight: 1.2 }}>
+            <div style={{ fontFamily: "serif", fontSize: "28px", color: "var(--text)", lineHeight: 1.2 }}>
               Curation Overview
             </div>
           </div>
@@ -177,11 +177,11 @@ export default function DashboardPage() {
         )}
 
         {/* Recent Books */}
-        <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: isMobile ? "16px" : "20px", marginBottom: "18px" }}>
+        <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: isMobile ? "16px" : "20px", marginBottom: "18px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-            <div style={{ fontSize: "14px", fontWeight: 600, color: "#f0ece4" }}>Recent Books</div>
+            <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>Recent Books</div>
             {!loading && books.length > 0 && (
-              <span style={{ fontSize: "12px", color: "#5a5f78" }}>{books.length} shown</span>
+              <span style={{ fontSize: "12px", color: "var(--text-dim)" }}>{books.length} shown</span>
             )}
           </div>
 
@@ -193,18 +193,18 @@ export default function DashboardPage() {
                 ))}
               </div>
             ) : books.length === 0 ? (
-              <div style={{ padding: "24px 12px", textAlign: "center", color: "#5a5f78", fontSize: "13px" }}>No books yet.</div>
+              <div style={{ padding: "24px 12px", textAlign: "center", color: "var(--text-dim)", fontSize: "13px" }}>No books yet.</div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
                 {books.slice(0, 5).map((book: any) => (
                   <div key={book._id} style={{
                     display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px",
                     padding: "10px 4px",
-                    borderBottom: "1px solid rgba(255,255,255,0.04)",
+                    borderBottom: "1px solid var(--hover-bg)",
                   }}>
                     <div style={{ minWidth: 0, flex: 1 }}>
-                      <div style={{ color: "#f0ece4", fontSize: "14px", fontWeight: 500, fontStyle: "italic", fontFamily: "serif", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{book.title}</div>
-                      <div style={{ color: "#8a8fa8", fontSize: "12px", marginTop: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <div style={{ color: "var(--text)", fontSize: "14px", fontWeight: 500, fontStyle: "italic", fontFamily: "serif", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{book.title}</div>
+                      <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {book.author?.name || book.author || "—"}
                       </div>
                     </div>
@@ -221,19 +221,19 @@ export default function DashboardPage() {
                 <thead>
                   <tr>
                     {["Title", "Author", "ISBN", "Status"].map(h => (
-                      <th key={h} style={{ textAlign: "left", padding: "10px 12px", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid rgba(255,255,255,0.07)", fontWeight: 600 }}>{h}</th>
+                      <th key={h} style={{ textAlign: "left", padding: "10px 12px", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid var(--border)", fontWeight: 600 }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {loading ? <TableSkeleton cols={4} /> : books.length === 0 ? (
-                    <tr><td colSpan={4} style={{ padding: "40px 12px", textAlign: "center", color: "#5a5f78", fontSize: "13px" }}>No books yet.</td></tr>
+                    <tr><td colSpan={4} style={{ padding: "40px 12px", textAlign: "center", color: "var(--text-dim)", fontSize: "13px" }}>No books yet.</td></tr>
                   ) : books.slice(0, 5).map((book: any) => (
                     <tr key={book._id} className="table-row">
-                      <td style={{ padding: "13px 12px", color: "#f0ece4", fontWeight: 500, borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.title}</td>
-                      <td style={{ padding: "13px 12px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.author?.name || book.author || "—"}</td>
-                      <td style={{ padding: "13px 12px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.isbn || "—"}</td>
-                      <td style={{ padding: "13px 12px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                      <td style={{ padding: "13px 12px", color: "var(--text)", fontWeight: 500, borderBottom: "1px solid var(--hover-bg)" }}>{book.title}</td>
+                      <td style={{ padding: "13px 12px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.author?.name || book.author || "—"}</td>
+                      <td style={{ padding: "13px 12px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.isbn || "—"}</td>
+                      <td style={{ padding: "13px 12px", borderBottom: "1px solid var(--hover-bg)" }}>
                         <span style={{ padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: 600, background: book.isBorrowed ? "rgba(90,141,238,0.12)" : "rgba(76,175,130,0.12)", color: book.isBorrowed ? "#5a8dee" : "#4caf82" }}>
                           {book.isBorrowed ? "Borrowed" : "Available"}
                         </span>
@@ -247,9 +247,9 @@ export default function DashboardPage() {
         </div>
 
         {/* Overdue */}
-        <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: isMobile ? "16px" : "20px" }}>
+        <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", padding: isMobile ? "16px" : "20px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-            <div style={{ fontSize: "14px", fontWeight: 600, color: "#f0ece4" }}>Overdue Books</div>
+            <div style={{ fontSize: "14px", fontWeight: 600, color: "var(--text)" }}>Overdue Books</div>
             {!loading && (
               <span style={{ padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: 600, background: overdue.length > 0 ? "rgba(224,85,85,0.12)" : "rgba(76,175,130,0.12)", color: overdue.length > 0 ? "#e05555" : "#4caf82" }}>
                 {overdue.length} overdue
@@ -265,18 +265,18 @@ export default function DashboardPage() {
                 ))}
               </div>
             ) : overdue.length === 0 ? (
-              <div style={{ padding: "24px 12px", textAlign: "center", color: "#5a5f78", fontSize: "13px" }}>All clear — no overdue books.</div>
+              <div style={{ padding: "24px 12px", textAlign: "center", color: "var(--text-dim)", fontSize: "13px" }}>All clear — no overdue books.</div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
                 {overdue.slice(0, 5).map((book: any) => (
                   <div key={book._id} style={{
                     display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px",
                     padding: "10px 4px",
-                    borderBottom: "1px solid rgba(255,255,255,0.04)",
+                    borderBottom: "1px solid var(--hover-bg)",
                   }}>
                     <div style={{ minWidth: 0, flex: 1 }}>
-                      <div style={{ color: "#f0ece4", fontSize: "14px", fontWeight: 500, fontStyle: "italic", fontFamily: "serif", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{book.title}</div>
-                      <div style={{ color: "#8a8fa8", fontSize: "12px", marginTop: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <div style={{ color: "var(--text)", fontSize: "14px", fontWeight: 500, fontStyle: "italic", fontFamily: "serif", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{book.title}</div>
+                      <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {book.borrowedBy?.name || "—"}
                       </div>
                     </div>
@@ -293,21 +293,21 @@ export default function DashboardPage() {
                 <thead>
                   <tr>
                     {["Book", "Student", "Due Date", "Status"].map(h => (
-                      <th key={h} style={{ textAlign: "left", padding: "10px 12px", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid rgba(255,255,255,0.07)", fontWeight: 600 }}>{h}</th>
+                      <th key={h} style={{ textAlign: "left", padding: "10px 12px", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid var(--border)", fontWeight: 600 }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {loading ? <TableSkeleton cols={4} /> : overdue.length === 0 ? (
-                    <tr><td colSpan={4} style={{ padding: "40px 12px", textAlign: "center", color: "#5a5f78", fontSize: "13px" }}>All clear — no overdue books.</td></tr>
+                    <tr><td colSpan={4} style={{ padding: "40px 12px", textAlign: "center", color: "var(--text-dim)", fontSize: "13px" }}>All clear — no overdue books.</td></tr>
                   ) : overdue.slice(0, 5).map((book: any) => (
                     <tr key={book._id} className="table-row">
-                      <td style={{ padding: "13px 12px", color: "#f0ece4", fontWeight: 500, borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.title}</td>
-                      <td style={{ padding: "13px 12px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.borrowedBy?.name || "—"}</td>
-                      <td style={{ padding: "13px 12px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                      <td style={{ padding: "13px 12px", color: "var(--text)", fontWeight: 500, borderBottom: "1px solid var(--hover-bg)" }}>{book.title}</td>
+                      <td style={{ padding: "13px 12px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.borrowedBy?.name || "—"}</td>
+                      <td style={{ padding: "13px 12px", borderBottom: "1px solid var(--hover-bg)" }}>
                         <span style={{ color: "#e05555", fontSize: "12px" }}>{book.returnDate ? new Date(book.returnDate).toLocaleDateString() : "—"}</span>
                       </td>
-                      <td style={{ padding: "13px 12px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                      <td style={{ padding: "13px 12px", borderBottom: "1px solid var(--hover-bg)" }}>
                         <span style={{ padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: 600, background: "rgba(224,85,85,0.12)", color: "#e05555" }}>Overdue</span>
                       </td>
                     </tr>

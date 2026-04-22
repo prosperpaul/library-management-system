@@ -26,8 +26,8 @@ export default function LogoutPage() {
     <main style={{
       display: "flex", alignItems: "center", justifyContent: "center",
       minHeight: "100vh", padding: "20px",
-      background: "#0f1117",
-      backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)",
+      background: "var(--bg)",
+      backgroundImage: "radial-gradient(circle at 1px 1px, var(--hover-bg) 1px, transparent 0)",
       backgroundSize: "28px 28px",
     }}>
 
@@ -65,7 +65,7 @@ export default function LogoutPage() {
       <div
         className={stage === "confirm" ? "logout-card-enter" : "logout-card-leave"}
         style={{
-          background: "#14171f", border: "1px solid rgba(255,255,255,0.08)",
+          background: "var(--surface)", border: "1px solid var(--border)",
           borderRadius: "24px", padding: "48px 44px", width: "400px", maxWidth: "100%",
           boxShadow: "0 32px 80px rgba(0,0,0,0.5)", textAlign: "center",
         }}
@@ -88,10 +88,10 @@ export default function LogoutPage() {
             </div>
 
             {/* Text */}
-            <div style={{ fontFamily: "serif", fontSize: "24px", color: "#f0ece4", marginBottom: "10px" }}>
+            <div style={{ fontFamily: "serif", fontSize: "24px", color: "var(--text)", marginBottom: "10px" }}>
               Leaving already?
             </div>
-            <div style={{ fontSize: "14px", color: "#5a5f78", lineHeight: 1.7, marginBottom: "32px" }}>
+            <div style={{ fontSize: "14px", color: "var(--text-dim)", lineHeight: 1.7, marginBottom: "32px" }}>
               You're about to sign out of your LibraryOS account, <span style={{ color: "#c8a96e", fontWeight: 500 }}>{userName}</span>. You'll need to sign in again next time.
             </div>
 
@@ -101,18 +101,18 @@ export default function LogoutPage() {
                 onClick={() => router.back()}
                 style={{
                   flex: 1, padding: "13px",
-                  background: "transparent", color: "#8a8fa8",
-                  border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px",
+                  background: "transparent", color: "var(--text-muted)",
+                  border: "1px solid var(--border-hover)", borderRadius: "12px",
                   fontSize: "14px", fontWeight: 600, cursor: "pointer",
                   fontFamily: "inherit", transition: "all 0.2s",
                 }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.15)";
+                  (e.currentTarget as HTMLButtonElement).style.background = "var(--hover-bg)";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border-hover)";
                 }}
                 onMouseLeave={e => {
                   (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.1)";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border-hover)";
                 }}
               >
                 Stay signed in
@@ -153,10 +153,10 @@ export default function LogoutPage() {
               </svg>
             </div>
 
-            <div className="logout-icon-pulse" style={{ fontFamily: "serif", fontSize: "24px", color: "#f0ece4", marginBottom: "10px" }}>
+            <div className="logout-icon-pulse" style={{ fontFamily: "serif", fontSize: "24px", color: "var(--text)", marginBottom: "10px" }}>
               Goodbye, {userName}
             </div>
-            <div style={{ fontSize: "14px", color: "#5a5f78", lineHeight: 1.7 }}>
+            <div style={{ fontSize: "14px", color: "var(--text-dim)", lineHeight: 1.7 }}>
               Signing you out securely...
             </div>
           </>

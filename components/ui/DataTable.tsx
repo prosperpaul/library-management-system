@@ -25,9 +25,9 @@ export default function DataTable({ columns, data, loading = false, emptyMessage
             {columns.map((col) => (
               <th key={col.key} style={{
                 textAlign: "left", padding: "10px 12px",
-                fontSize: "11px", color: "#5a5f78",
+                fontSize: "11px", color: "var(--text-dim)",
                 textTransform: "uppercase", letterSpacing: "1px",
-                borderBottom: "1px solid rgba(255,255,255,0.07)",
+                borderBottom: "1px solid var(--border)",
                 width: col.width,
                 whiteSpace: "nowrap",
               }}>
@@ -39,10 +39,10 @@ export default function DataTable({ columns, data, loading = false, emptyMessage
         <tbody>
           {loading ? (
             <tr>
-              <td colSpan={columns.length} style={{ padding: "40px", textAlign: "center", color: "#5a5f78" }}>
+              <td colSpan={columns.length} style={{ padding: "40px", textAlign: "center", color: "var(--text-dim)" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
                   <div style={{
-                    width: "16px", height: "16px", border: "2px solid rgba(255,255,255,0.1)",
+                    width: "16px", height: "16px", border: "2px solid var(--border-hover)",
                     borderTopColor: "#c8a96e", borderRadius: "50%",
                     animation: "spin 0.8s linear infinite",
                   }} />
@@ -52,20 +52,20 @@ export default function DataTable({ columns, data, loading = false, emptyMessage
             </tr>
           ) : data.length === 0 ? (
             <tr>
-              <td colSpan={columns.length} style={{ padding: "60px", textAlign: "center", color: "#5a5f78", fontSize: "14px" }}>
+              <td colSpan={columns.length} style={{ padding: "60px", textAlign: "center", color: "var(--text-dim)", fontSize: "14px" }}>
                 {emptyMessage}
               </td>
             </tr>
           ) : (
             data.map((row, i) => (
               <tr key={row._id || i} style={{ transition: "background 0.1s" }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.02)")}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--hover-bg-soft)")}
                 onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
               >
                 {columns.map((col) => (
                   <td key={col.key} style={{
-                    padding: "12px", color: "#8a8fa8",
-                    borderBottom: "1px solid rgba(255,255,255,0.04)",
+                    padding: "12px", color: "var(--text-muted)",
+                    borderBottom: "1px solid var(--hover-bg)",
                     verticalAlign: "middle",
                   }}>
                     {col.render ? col.render(row) : row[col.key] ?? "—"}

@@ -1,23 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
 @import "tailwindcss";
 
-/* ─── Variables ─────────────────────────────────────── */
-:root {
+/* ─── Dark Theme (default) ──────────────────────────── */
+:root, [data-theme="dark"] {
   --bg:            #0f1117;
   --surface:       #14171f;
   --surface2:      #1c202c;
   --surface3:      #242836;
   --accent:        #c8a96e;
+  --accent-fg:     #0f1117;
+  --accent-hover:  #d4b87c;
   --accent-dim:    rgba(200, 169, 110, 0.12);
   --accent-glow:   rgba(200, 169, 110, 0.25);
   --text:          #f0ece4;
   --text-muted:    #8a8fa8;
   --text-dim:      #5a5f78;
+  --text-disabled: #3a3f52;
   --border:        rgba(255, 255, 255, 0.07);
   --border-hover:  rgba(255, 255, 255, 0.13);
+  --hover-bg:      rgba(255, 255, 255, 0.038);
+  --hover-bg-soft: rgba(255, 255, 255, 0.022);
+  --backdrop:      rgba(0, 0, 0, 0.72);
+  --shadow-lg:     0 24px 64px rgba(0,0,0,0.4);
+  --shadow-md:     0 8px 28px rgba(0,0,0,0.22);
+  --skeleton-1:    #1c202c;
+  --skeleton-2:    #252b3a;
+  --scrollbar:     rgba(255,255,255,0.08);
+  --scrollbar-hov: rgba(255,255,255,0.16);
   --success:       #4caf82;
   --danger:        #e05555;
   --info:          #5a8dee;
+}
+
+/* ─── Light Theme ───────────────────────────────────── */
+[data-theme="light"] {
+  --bg:            #f6f0e4;
+  --surface:       #ffffff;
+  --surface2:      #faf5ec;
+  --surface3:      #f0ead8;
+  --accent:        #c8a96e;
+  --accent-fg:     #1a1d27;
+  --accent-hover:  #b5904a;
+  --accent-dim:    rgba(200, 169, 110, 0.12);
+  --accent-glow:   rgba(200, 169, 110, 0.25);
+  --text:          #1a1d27;
+  --text-muted:    #4a4e60;
+  --text-dim:      #838799;
+  --text-disabled: #b4b8c4;
+  --border:        rgba(0, 0, 0, 0.08);
+  --border-hover:  rgba(0, 0, 0, 0.16);
+  --hover-bg:      rgba(0, 0, 0, 0.035);
+  --hover-bg-soft: rgba(0, 0, 0, 0.02);
+  --backdrop:      rgba(0, 0, 0, 0.35);
+  --shadow-lg:     0 24px 64px rgba(80, 60, 20, 0.12);
+  --shadow-md:     0 8px 28px rgba(80, 60, 20, 0.08);
+  --skeleton-1:    #ede7d9;
+  --skeleton-2:    #dfd8c6;
+  --scrollbar:     rgba(0,0,0,0.12);
+  --scrollbar-hov: rgba(0,0,0,0.24);
+  --success:       #2d9960;
+  --danger:        #d03030;
+  --info:          #3c72e0;
 }
 
 /* ─── Reset ─────────────────────────────────────────── */
@@ -32,6 +75,7 @@ body {
   font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   font-size: 14px;
   line-height: 1.6;
+  transition: background 0.2s ease, color 0.2s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -46,17 +90,17 @@ a { text-decoration: none; }
 /* ─── Scrollbar ─────────────────────────────────────── */
 ::-webkit-scrollbar             { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track       { background: transparent; }
-::-webkit-scrollbar-thumb       { background: rgba(255,255,255,0.08); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
-*                               { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent; }
+::-webkit-scrollbar-thumb       { background: var(--scrollbar); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hov); }
+*                               { scrollbar-width: thin; scrollbar-color: var(--scrollbar) transparent; }
 
 /* ─── Focus Rings (overrides inline outline:none) ──── */
 input:focus,
 textarea:focus,
 select:focus {
   outline: none !important;
-  border-color: rgba(200, 169, 110, 0.55) !important;
-  box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.09) !important;
+  border-color: var(--accent-glow) !important;
+  box-shadow: 0 0 0 3px var(--accent-dim) !important;
 }
 
 /* ─── Global Button Transitions ────────────────────── */
@@ -70,37 +114,37 @@ button:disabled               { cursor: not-allowed !important; }
 
 /* ─── Button Variants ───────────────────────────────── */
 .btn-primary:hover:not(:disabled) {
-  background: #d4b87c !important;
-  box-shadow: 0 4px 20px rgba(200,169,110,0.28) !important;
+  background: var(--accent-hover) !important;
+  box-shadow: 0 4px 20px var(--accent-glow) !important;
 }
 
 .btn-danger:hover:not(:disabled) {
   background: rgba(224,85,85,0.18) !important;
   border-color: rgba(224,85,85,0.5) !important;
-  color: #f07070 !important;
+  color: var(--danger) !important;
 }
 
 .btn-success:hover:not(:disabled) {
   background: rgba(76,175,130,0.18) !important;
   border-color: rgba(76,175,130,0.5) !important;
-  color: #5dcf9a !important;
+  color: var(--success) !important;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #252a38 !important;
-  border-color: rgba(255,255,255,0.13) !important;
-  color: #c0c4d6 !important;
+  background: var(--surface3) !important;
+  border-color: var(--border-hover) !important;
+  color: var(--text) !important;
 }
 
 /* ─── Table Rows ────────────────────────────────────── */
 .table-row { transition: background 0.1s ease; }
-.table-row:hover td { background: rgba(255,255,255,0.022) !important; }
+.table-row:hover td { background: var(--hover-bg-soft) !important; }
 
 /* ─── Nav Links ─────────────────────────────────────── */
 .nav-link { transition: background 0.15s ease, color 0.15s ease !important; }
 .nav-link:hover {
-  background: rgba(255,255,255,0.038) !important;
-  color: #e8e4dc !important;
+  background: var(--hover-bg) !important;
+  color: var(--text) !important;
 }
 
 /* ─── Stat Cards ────────────────────────────────────── */
@@ -110,8 +154,8 @@ button:disabled               { cursor: not-allowed !important; }
 }
 .stat-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(200,169,110,0.22) !important;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.22) !important;
+  border-color: var(--accent-glow) !important;
+  box-shadow: var(--shadow-md) !important;
 }
 
 /* ─── Student/Person Cards ──────────────────────────── */
@@ -121,8 +165,8 @@ button:disabled               { cursor: not-allowed !important; }
 }
 .person-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.13) !important;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.18) !important;
+  border-color: var(--border-hover) !important;
+  box-shadow: var(--shadow-md) !important;
 }
 
 /* ─── Skeleton ──────────────────────────────────────── */
@@ -133,9 +177,9 @@ button:disabled               { cursor: not-allowed !important; }
 .skeleton {
   background: linear-gradient(
     90deg,
-    #1c202c 25%,
-    #252b3a 50%,
-    #1c202c 75%
+    var(--skeleton-1) 25%,
+    var(--skeleton-2) 50%,
+    var(--skeleton-1) 75%
   );
   background-size: 1200px 100%;
   animation: shimmer 1.8s ease-in-out infinite;

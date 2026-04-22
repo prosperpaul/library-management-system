@@ -54,11 +54,11 @@ export default function MobileBottomNav({ onMenuClick, drawerOpen }: MobileBotto
       width: "min(92%, 420px)",
       height: "62px",
       borderRadius: "999px",
-      background: "rgba(20, 23, 31, 0.85)",
+      background: "color-mix(in srgb, var(--surface) 88%, transparent)",
       backdropFilter: "blur(16px)",
       WebkitBackdropFilter: "blur(16px)",
-      border: "1px solid rgba(255, 255, 255, 0.08)",
-      boxShadow: "0 12px 40px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.3)",
+      border: "1px solid var(--border-hover)",
+      boxShadow: "var(--shadow-lg)",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
@@ -72,7 +72,7 @@ export default function MobileBottomNav({ onMenuClick, drawerOpen }: MobileBotto
             <div style={{
               display: "flex", flexDirection: "column", alignItems: "center",
               justifyContent: "center", gap: "3px",
-              color: active ? "#c8a96e" : "#5a5f78",
+              color: active ? "#c8a96e" : "var(--text-dim)",
               transform: active ? "scale(1.05)" : "scale(1)",
               transition: "all 0.3s cubic-bezier(0.23, 1, 0.32, 1)",
             }}>
@@ -98,7 +98,7 @@ export default function MobileBottomNav({ onMenuClick, drawerOpen }: MobileBotto
         style={{
           flex: 1, background: "none", border: "none", cursor: "pointer", padding: 0,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "3px",
-          color: drawerOpen ? "#c8a96e" : "#5a5f78",
+          color: drawerOpen ? "#c8a96e" : "var(--text-dim)",
           transform: drawerOpen ? "scale(1.05)" : "scale(1)",
           transition: "all 0.3s cubic-bezier(0.23, 1, 0.32, 1)",
         }}

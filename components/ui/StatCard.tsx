@@ -9,8 +9,8 @@ interface StatCardProps {
 export default function StatCard({ label, value, sub, dotColor, icon }: StatCardProps) {
   return (
     <div style={{
-      background: "#14171f",
-      border: "1px solid rgba(255,255,255,0.07)",
+      background: "var(--surface)",
+      border: "1px solid var(--border)",
       borderRadius: "14px",
       padding: "20px",
       display: "flex",
@@ -26,13 +26,13 @@ export default function StatCard({ label, value, sub, dotColor, icon }: StatCard
         background: dotColor, opacity: 0.12,
       }} />
 
-      <div style={{ fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1.2px" }}>
+      <div style={{ fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1.2px" }}>
         {label}
       </div>
-      <div style={{ fontFamily: "serif", fontSize: "34px", color: "#f0ece4", lineHeight: 1 }}>
+      <div style={{ fontFamily: "serif", fontSize: "34px", color: "var(--text)", lineHeight: 1 }}>
         {value}
       </div>
-      <div style={{ fontSize: "12px", color: "#8a8fa8", display: "flex", alignItems: "center", gap: "6px" }}>
+      <div style={{ fontSize: "12px", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "6px" }}>
         <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: dotColor, display: "inline-block", flexShrink: 0 }} />
         {sub}
       </div>

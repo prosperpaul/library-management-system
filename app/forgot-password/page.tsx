@@ -5,9 +5,9 @@ import Link from "next/link";
 import { api } from "@/lib/api";
 
 const inputStyle: React.CSSProperties = {
-  width: "100%", background: "#1c202c",
-  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px",
-  padding: "10px 12px", color: "#f0ece4", fontSize: "14px",
+  width: "100%", background: "var(--surface2)",
+  border: "1px solid var(--border)", borderRadius: "8px",
+  padding: "10px 12px", color: "var(--text)", fontSize: "14px",
   outline: "none", fontFamily: "inherit", boxSizing: "border-box",
 };
 
@@ -35,12 +35,12 @@ export default function ForgotPasswordPage() {
     <main style={{
       display: "flex", alignItems: "center", justifyContent: "center",
       minHeight: "100vh", padding: "20px",
-      background: "#0f1117",
-      backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)",
+      background: "var(--bg)",
+      backgroundImage: "radial-gradient(circle at 1px 1px, var(--hover-bg) 1px, transparent 0)",
       backgroundSize: "28px 28px",
     }}>
       <div className="anim-fade-up" style={{
-        background: "#14171f", border: "1px solid rgba(255,255,255,0.08)",
+        background: "var(--surface)", border: "1px solid var(--border)",
         borderRadius: "20px", padding: "40px 36px", width: "380px", maxWidth: "100%",
         boxShadow: "0 24px 64px rgba(0,0,0,0.4)",
       }}>
@@ -52,7 +52,7 @@ export default function ForgotPasswordPage() {
             </svg>
           </div>
           <div style={{ fontFamily: "serif", fontSize: "26px", color: "#c8a96e", letterSpacing: "0.5px" }}>LibraryOS</div>
-          <div style={{ fontSize: "13px", color: "#5a5f78", marginTop: "4px" }}>Reset your password</div>
+          <div style={{ fontSize: "13px", color: "var(--text-dim)", marginTop: "4px" }}>Reset your password</div>
         </div>
 
         {submitted ? (
@@ -63,8 +63,8 @@ export default function ForgotPasswordPage() {
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
             </div>
-            <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0ece4", marginBottom: "10px" }}>Check your email</div>
-            <div style={{ fontSize: "13px", color: "#5a5f78", lineHeight: 1.7 }}>
+            <div style={{ fontSize: "16px", fontWeight: 600, color: "var(--text)", marginBottom: "10px" }}>Check your email</div>
+            <div style={{ fontSize: "13px", color: "var(--text-dim)", lineHeight: 1.7 }}>
               If an account exists for{" "}
               <span style={{ color: "#c8a96e", fontWeight: 500 }}>{email}</span>,
               {" "}a password reset link has been sent.
@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
           </div>
         ) : (
           <>
-            <p style={{ fontSize: "13px", color: "#8a8fa8", marginBottom: "24px", lineHeight: 1.7 }}>
+            <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "24px", lineHeight: 1.7 }}>
               Enter the email address linked to your account and we'll send you a reset link.
             </p>
 
@@ -83,7 +83,7 @@ export default function ForgotPasswordPage() {
             )}
 
             <div style={{ marginBottom: "22px" }}>
-              <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px", fontWeight: 600 }}>
+              <label style={{ display: "block", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px", fontWeight: 600 }}>
                 Email Address
               </label>
               <input
@@ -99,8 +99,8 @@ export default function ForgotPasswordPage() {
               className="btn-primary"
               style={{
                 width: "100%", padding: "12px",
-                background: email.trim() ? "#c8a96e" : "#2a2d3a",
-                color: email.trim() ? "#0f1117" : "#5a5f78",
+                background: email.trim() ? "#c8a96e" : "var(--surface3)",
+                color: email.trim() ? "var(--bg)" : "var(--text-dim)",
                 border: "none", borderRadius: "10px", fontSize: "15px",
                 fontWeight: 700, cursor: email.trim() ? "pointer" : "not-allowed",
                 fontFamily: "inherit", transition: "all 0.2s",
@@ -112,7 +112,7 @@ export default function ForgotPasswordPage() {
           </>
         )}
 
-        <p style={{ textAlign: "center", fontSize: "13px", color: "#5a5f78", marginTop: "24px" }}>
+        <p style={{ textAlign: "center", fontSize: "13px", color: "var(--text-dim)", marginTop: "24px" }}>
           Remember your password?{" "}
           <Link href="/login" style={{ color: "#c8a96e", textDecoration: "none", fontWeight: 500 }}>Back to sign in</Link>
         </p>

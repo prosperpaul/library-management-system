@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const navItems = [
   {
@@ -55,6 +56,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const initials = user?.name
     ?.split(" ")
@@ -66,8 +68,8 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
   return (
     <aside style={{
       width: "220px",
-      background: "#14171f",
-      borderRight: "1px solid rgba(255,255,255,0.07)",
+      background: "var(--surface)",
+      borderRight: "1px solid var(--border)",
       display: "flex",
       flexDirection: "column",
       height: "100vh",
@@ -77,21 +79,21 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
       {/* ── Logo ── */}
       <div style={{
         padding: "22px 20px 18px",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        borderBottom: "1px solid var(--border)",
         display: "flex", alignItems: "flex-start", justifyContent: "space-between",
       }}>
         <div>
           <div style={{ fontFamily: "serif", fontSize: "20px", color: "#c8a96e", letterSpacing: "0.3px" }}>
             LibraryOS
           </div>
-          <div style={{ fontSize: "10px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "2px", marginTop: "3px" }}>
+          <div style={{ fontSize: "10px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "2px", marginTop: "3px" }}>
             Management System
           </div>
         </div>
         {onClose && (
           <button
             onClick={onClose}
-            style={{ background: "none", border: "none", color: "#5a5f78", cursor: "pointer", fontSize: "18px", padding: "2px", marginTop: "2px" }}
+            style={{ background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", fontSize: "18px", padding: "2px", marginTop: "2px" }}
           >
             ✕
           </button>
@@ -104,7 +106,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
           <div key={group.section} style={{ marginBottom: "4px" }}>
             <div style={{
               padding: "10px 16px 5px",
-              fontSize: "10px", color: "#5a5f78",
+              fontSize: "10px", color: "var(--text-dim)",
               textTransform: "uppercase", letterSpacing: "1.5px",
               fontWeight: 600,
             }}>
@@ -126,7 +128,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
                       padding: "9px 14px", margin: "1px 8px", borderRadius: "9px",
                       fontSize: "13.5px", fontWeight: active ? 500 : 400,
                       position: "relative",
-                      color: active ? "#c8a96e" : "#8a8fa8",
+                      color: active ? "#c8a96e" : "var(--text-muted)",
                       background: active ? "rgba(200,169,110,0.1)" : "transparent",
                     }}
                   >
@@ -149,17 +151,18 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
       </nav>
 
       {/* ── User Footer ── */}
-      <div style={{ padding: "12px 14px 16px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-        {/* Role badge */}
-        <div style={{
-          display: "inline-flex", alignItems: "center", gap: "5px",
-          padding: "3px 10px", borderRadius: "20px", fontSize: "10px",
-          fontWeight: 600, letterSpacing: "0.5px", marginBottom: "10px",
-          background: user?.role === "admin" ? "rgba(200,169,110,0.1)" : "rgba(90,141,238,0.1)",
-          border: `1px solid ${user?.role === "admin" ? "rgba(200,169,110,0.2)" : "rgba(90,141,238,0.2)"}`,
-          color: user?.role === "admin" ? "#c8a96e" : "#5a8dee",
-          textTransform: "uppercase",
-        }}>
+      <div style={{ padding: "12px 14px 16px", borderTop: "1px solid var(--border)" }}>
+        {/* Role badge + theme toggle */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px" }}>
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: "5px",
+            padding: "3px 10px", borderRadius: "20px", fontSize: "10px",
+            fontWeight: 600, letterSpacing: "0.5px",
+            background: user?.role === "admin" ? "rgba(200,169,110,0.1)" : "rgba(90,141,238,0.1)",
+            border: `1px solid ${user?.role === "admin" ? "rgba(200,169,110,0.2)" : "rgba(90,141,238,0.2)"}`,
+            color: user?.role === "admin" ? "#c8a96e" : "#5a8dee",
+            textTransform: "uppercase",
+          }}>
           {user?.role === "admin" ? (
             <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -170,14 +173,50 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
             </svg>
           )}
           {user?.role === "admin" ? "Admin" : "Attendant"}
+          </div>
+
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label="Toggle theme"
+            style={{
+              width: "28px", height: "28px", borderRadius: "50%",
+              background: "var(--surface2)",
+              border: "1px solid var(--border)",
+              color: "var(--text-muted)",
+              cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border-hover)";
+              (e.currentTarget as HTMLButtonElement).style.color = "#c8a96e";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border)";
+              (e.currentTarget as HTMLButtonElement).style.color = "var(--text-muted)";
+            }}
+          >
+            {theme === "dark" ? (
+              <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+            ) : (
+              <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            )}
+          </button>
         </div>
 
         {/* User card */}
         <div style={{
           display: "flex", alignItems: "center", gap: "10px",
           padding: "10px 12px",
-          background: "#1c202c",
-          border: "1px solid rgba(255,255,255,0.06)",
+          background: "var(--surface2)",
+          border: "1px solid var(--border)",
           borderRadius: "11px",
         }}>
           {/* Avatar */}
@@ -185,7 +224,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
             width: "34px", height: "34px", borderRadius: "50%",
             background: "linear-gradient(135deg, #c8a96e, #9b7a4a)",
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "13px", fontWeight: 700, color: "#0f1117", flexShrink: 0,
+            fontSize: "13px", fontWeight: 700, color: "var(--bg)", flexShrink: 0,
           }}>
             {initials}
           </div>
@@ -193,13 +232,13 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
           {/* Name + email */}
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{
-              fontSize: "13px", fontWeight: 500, color: "#f0ece4",
+              fontSize: "13px", fontWeight: 500, color: "var(--text)",
               overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
             }}>
               {user?.name || "Librarian"}
             </div>
             <div style={{
-              fontSize: "11px", color: "#5a5f78",
+              fontSize: "11px", color: "var(--text-dim)",
               overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
             }}>
               {user?.email || ""}
@@ -213,7 +252,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
             style={{
               background: "none",
               border: "1px solid rgba(224,85,85,0.2)",
-              color: "#5a5f78",
+              color: "var(--text-dim)",
               cursor: "pointer",
               padding: "5px",
               borderRadius: "7px",
@@ -227,7 +266,7 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
             }}
             onMouseLeave={e => {
               (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(224,85,85,0.2)";
-              (e.currentTarget as HTMLButtonElement).style.color = "#5a5f78";
+              (e.currentTarget as HTMLButtonElement).style.color = "var(--text-dim)";
               (e.currentTarget as HTMLButtonElement).style.background = "none";
             }}
           >

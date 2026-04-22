@@ -6,14 +6,14 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 
 const inputStyle: React.CSSProperties = {
-  width: "100%", background: "#1c202c",
-  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "10px",
-  padding: "12px 14px", color: "#f0ece4", fontSize: "14px",
+  width: "100%", background: "var(--surface2)",
+  border: "1px solid var(--border)", borderRadius: "10px",
+  padding: "12px 14px", color: "var(--text)", fontSize: "14px",
   outline: "none", fontFamily: "inherit", boxSizing: "border-box",
 };
 
 const labelStyle: React.CSSProperties = {
-  display: "block", fontSize: "11px", color: "#5a5f78",
+  display: "block", fontSize: "11px", color: "var(--text-dim)",
   textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600,
 };
 
@@ -58,12 +58,12 @@ export default function LoginPage() {
     <main style={{
       display: "flex", alignItems: "center", justifyContent: "center",
       minHeight: "100vh", padding: "20px",
-      background: "#0f1117",
-      backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)",
+      background: "var(--bg)",
+      backgroundImage: "radial-gradient(circle at 1px 1px, var(--hover-bg) 1px, transparent 0)",
       backgroundSize: "28px 28px",
     }}>
       <div className="anim-fade-up" style={{
-        background: "#14171f", border: "1px solid rgba(255,255,255,0.08)",
+        background: "var(--surface)", border: "1px solid var(--border)",
         borderRadius: "24px", padding: "44px 40px", width: "400px", maxWidth: "100%",
         boxShadow: "0 32px 80px rgba(0,0,0,0.5)",
       }}>
@@ -81,10 +81,10 @@ export default function LoginPage() {
               <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
             </svg>
           </div>
-          <div style={{ fontFamily: "serif", fontSize: "28px", color: "#f0ece4", letterSpacing: "0.3px", marginBottom: "6px" }}>
+          <div style={{ fontFamily: "serif", fontSize: "28px", color: "var(--text)", letterSpacing: "0.3px", marginBottom: "6px" }}>
             Welcome back
           </div>
-          <div style={{ fontSize: "13px", color: "#5a5f78" }}>Sign in to your LibraryOS account</div>
+          <div style={{ fontSize: "13px", color: "var(--text-dim)" }}>Sign in to your LibraryOS account</div>
         </div>
 
         {/* Error */}
@@ -130,7 +130,7 @@ export default function LoginPage() {
             />
             <button
               onClick={() => setShowPassword(s => !s)}
-              style={{ position: "absolute", right: "13px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#5a5f78", cursor: "pointer", padding: "4px", display: "flex", alignItems: "center" }}
+              style={{ position: "absolute", right: "13px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", padding: "4px", display: "flex", alignItems: "center" }}
             >
               <EyeIcon open={showPassword} />
             </button>
@@ -143,7 +143,7 @@ export default function LoginPage() {
           className="btn-primary"
           style={{
             width: "100%", padding: "13px", background: "#c8a96e",
-            color: "#0f1117", border: "none", borderRadius: "12px",
+            color: "var(--bg)", border: "none", borderRadius: "12px",
             fontSize: "15px", fontWeight: 700, cursor: loading ? "not-allowed" : "pointer",
             fontFamily: "inherit", opacity: loading ? 0.7 : 1, transition: "all 0.2s",
             marginTop: "24px",
@@ -154,9 +154,9 @@ export default function LoginPage() {
 
         {/* Divider */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "22px 0" }}>
-          <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ fontSize: "12px", color: "#3a3f52" }}>or</span>
-          <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+          <span style={{ fontSize: "12px", color: "var(--text-disabled)" }}>or</span>
+          <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
         </div>
 
         {/* Create account button */}

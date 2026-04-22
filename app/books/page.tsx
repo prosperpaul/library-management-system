@@ -8,9 +8,9 @@ import Toast from "@/components/ui/Toast";
 import ConfirmModal from "@/components/ui/ConfirmModal";
 
 const inputStyle: React.CSSProperties = {
-  width: "100%", background: "#1c202c",
-  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px",
-  padding: "10px 12px", color: "#f0ece4", fontSize: "14px",
+  width: "100%", background: "var(--surface2)",
+  border: "1px solid var(--border)", borderRadius: "8px",
+  padding: "10px 12px", color: "var(--text)", fontSize: "14px",
   outline: "none", fontFamily: "inherit", boxSizing: "border-box",
   transition: "border-color 0.15s",
 };
@@ -39,13 +39,13 @@ function SearchSelect({ options, value, onChange, placeholder, loading: optLoadi
         style={{ ...inputStyle, opacity: optLoading ? 0.5 : 1 }}
       />
       {open && (
-        <div style={{ position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, background: "#1c202c", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "9px", maxHeight: "200px", overflowY: "auto", zIndex: 200, boxShadow: "0 8px 32px rgba(0,0,0,0.35)" }}>
+        <div style={{ position: "absolute", top: "calc(100% + 4px)", left: 0, right: 0, background: "var(--surface2)", border: "1px solid var(--border-hover)", borderRadius: "9px", maxHeight: "200px", overflowY: "auto", zIndex: 200, boxShadow: "0 8px 32px rgba(0,0,0,0.35)" }}>
           {filtered.length === 0 ? (
-            <div style={{ padding: "12px", color: "#5a5f78", fontSize: "13px", textAlign: "center" }}>No results</div>
+            <div style={{ padding: "12px", color: "var(--text-dim)", fontSize: "13px", textAlign: "center" }}>No results</div>
           ) : filtered.map((o) => (
             <div key={o.id} onMouseDown={() => { onChange(o.id); setOpen(false); setSearch(""); }}
-              style={{ padding: "10px 14px", color: o.id === value ? "#c8a96e" : "#f0ece4", cursor: "pointer", fontSize: "14px", borderBottom: "1px solid rgba(255,255,255,0.04)", background: o.id === value ? "rgba(200,169,110,0.08)" : "transparent", transition: "background 0.1s" }}
-              onMouseEnter={e => { if (o.id !== value) (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.04)"; }}
+              style={{ padding: "10px 14px", color: o.id === value ? "#c8a96e" : "var(--text)", cursor: "pointer", fontSize: "14px", borderBottom: "1px solid var(--hover-bg)", background: o.id === value ? "rgba(200,169,110,0.08)" : "transparent", transition: "background 0.1s" }}
+              onMouseEnter={e => { if (o.id !== value) (e.currentTarget as HTMLDivElement).style.background = "var(--hover-bg)"; }}
               onMouseLeave={e => { if (o.id !== value) (e.currentTarget as HTMLDivElement).style.background = "transparent"; }}
             >
               {o.label}
@@ -88,11 +88,11 @@ function BookCover({ title }: { title: string }) {
       background: coverGradient(title || "?"),
       display: "flex", alignItems: "center", justifyContent: "center",
       position: "relative",
-      boxShadow: "0 4px 14px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08)",
+      boxShadow: "0 4px 14px rgba(0,0,0,0.4), inset 0 0 0 1px var(--border)",
       overflow: "hidden",
     }}>
       {/* Subtle spine line */}
-      <div style={{ position: "absolute", left: "7px", top: 0, bottom: 0, width: "1px", background: "rgba(255,255,255,0.07)" }} />
+      <div style={{ position: "absolute", left: "7px", top: 0, bottom: 0, width: "1px", background: "var(--border)" }} />
       <span style={{
         fontFamily: "serif", fontStyle: "italic", fontSize: "30px",
         color: "rgba(240, 236, 228, 0.85)", lineHeight: 1,
@@ -217,7 +217,7 @@ export default function BooksPage() {
         {/* Search */}
         <div style={{ marginBottom: "16px" }}>
           <div style={{ position: "relative", width: isMobile ? "100%" : "300px", maxWidth: "100%" }}>
-            <svg width="14" height="14" fill="none" stroke="#5a5f78" strokeWidth="2" viewBox="0 0 24 24"
+            <svg width="14" height="14" fill="none" stroke="var(--text-dim)" strokeWidth="2" viewBox="0 0 24 24"
               style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
@@ -227,7 +227,7 @@ export default function BooksPage() {
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
               style={{
                 ...inputStyle,
-                background: "#1c202c",
+                background: "var(--surface2)",
                 paddingLeft: "40px",
                 paddingRight: "14px",
                 height: isMobile ? "46px" : "40px",
@@ -261,9 +261,9 @@ export default function BooksPage() {
                     fontSize: "12.5px",
                     fontWeight: 600,
                     whiteSpace: "nowrap",
-                    background: active ? "#c8a96e" : "#1c202c",
-                    color: active ? "#0f1117" : "#8a8fa8",
-                    border: active ? "1px solid #c8a96e" : "1px solid rgba(255,255,255,0.06)",
+                    background: active ? "#c8a96e" : "var(--surface2)",
+                    color: active ? "var(--bg)" : "var(--text-muted)",
+                    border: active ? "1px solid #c8a96e" : "1px solid var(--border)",
                     cursor: "pointer",
                     fontFamily: "inherit",
                     transition: "all 0.15s",
@@ -282,7 +282,7 @@ export default function BooksPage() {
           loading ? (
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "16px", padding: "14px", display: "flex", gap: "14px" }}>
+                <div key={i} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "16px", padding: "14px", display: "flex", gap: "14px" }}>
                   <div className="skeleton" style={{ width: "70px", height: "96px", borderRadius: "7px" }} />
                   <div style={{ flex: 1 }}>
                     <div className="skeleton" style={{ height: "14px", width: "75%", marginBottom: "10px" }} />
@@ -295,14 +295,14 @@ export default function BooksPage() {
           ) : visibleBooks.length === 0 ? (
             <div style={{
               padding: "50px 20px", textAlign: "center",
-              background: "#14171f", border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--surface)", border: "1px solid var(--border)",
               borderRadius: "16px",
             }}>
-              <svg width="40" height="40" fill="none" stroke="#5a5f78" strokeWidth="1.4" viewBox="0 0 24 24" style={{ marginBottom: "14px", opacity: 0.5 }}>
+              <svg width="40" height="40" fill="none" stroke="var(--text-dim)" strokeWidth="1.4" viewBox="0 0 24 24" style={{ marginBottom: "14px", opacity: 0.5 }}>
                 <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
               </svg>
-              <div style={{ fontSize: "14px", color: "#8a8fa8" }}>
+              <div style={{ fontSize: "14px", color: "var(--text-muted)" }}>
                 No books found{search ? ` for "${search}"` : filter !== "all" ? ` in ${filter}` : ""}.
               </div>
             </div>
@@ -310,8 +310,8 @@ export default function BooksPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {visibleBooks.map((book: any) => (
                 <div key={book._id} style={{
-                  background: "#14171f",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
                   borderRadius: "16px",
                   padding: "14px",
                   display: "flex",
@@ -325,7 +325,7 @@ export default function BooksPage() {
                       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px" }}>
                         <div style={{
                           fontFamily: "serif", fontStyle: "italic",
-                          fontSize: "17px", color: "#f0ece4", lineHeight: 1.25,
+                          fontSize: "17px", color: "var(--text)", lineHeight: 1.25,
                           overflow: "hidden", textOverflow: "ellipsis",
                           display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
                         }}>
@@ -342,11 +342,11 @@ export default function BooksPage() {
                           {book.isBorrowed ? "Out" : "Available"}
                         </span>
                       </div>
-                      <div style={{ fontSize: "13px", color: "#8a8fa8", marginTop: "6px" }}>
+                      <div style={{ fontSize: "13px", color: "var(--text-muted)", marginTop: "6px" }}>
                         {book.author?.name || book.author || "—"}
                       </div>
                       {book.isbn && (
-                        <div style={{ fontSize: "10px", color: "#5a5f78", marginTop: "8px", letterSpacing: "1px", fontFamily: "ui-monospace, monospace" }}>
+                        <div style={{ fontSize: "10px", color: "var(--text-dim)", marginTop: "8px", letterSpacing: "1px", fontFamily: "ui-monospace, monospace" }}>
                           ISBN · {book.isbn}
                         </div>
                       )}
@@ -358,7 +358,7 @@ export default function BooksPage() {
                           aria-label="Delete book"
                           style={{
                             background: "none", border: "none",
-                            color: "#5a5f78", cursor: "pointer",
+                            color: "var(--text-dim)", cursor: "pointer",
                             padding: "4px", display: "flex", alignItems: "center",
                           }}
                         >
@@ -377,12 +377,12 @@ export default function BooksPage() {
               {/* Pagination */}
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "8px", padding: "10px 0 4px" }}>
                 <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
-                  style={{ background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)", color: page === 1 ? "#3a3f52" : "#8a8fa8", padding: "8px 14px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", cursor: page === 1 ? "not-allowed" : "pointer" }}>
+                  style={{ background: "var(--surface2)", border: "1px solid var(--border)", color: page === 1 ? "var(--text-disabled)" : "var(--text-muted)", padding: "8px 14px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", cursor: page === 1 ? "not-allowed" : "pointer" }}>
                   ← Prev
                 </button>
-                <span style={{ padding: "6px 10px", fontSize: "13px", color: "#5a5f78" }}>Page {page}</span>
+                <span style={{ padding: "6px 10px", fontSize: "13px", color: "var(--text-dim)" }}>Page {page}</span>
                 <button onClick={() => setPage(p => p + 1)} disabled={books.length < 10}
-                  style={{ background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)", color: books.length < 10 ? "#3a3f52" : "#8a8fa8", padding: "8px 14px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", cursor: books.length < 10 ? "not-allowed" : "pointer" }}>
+                  style={{ background: "var(--surface2)", border: "1px solid var(--border)", color: books.length < 10 ? "var(--text-disabled)" : "var(--text-muted)", padding: "8px 14px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", cursor: books.length < 10 ? "not-allowed" : "pointer" }}>
                   Next →
                 </button>
               </div>
@@ -390,33 +390,33 @@ export default function BooksPage() {
           )
         ) : (
           /* ─── Desktop: table ─── */
-          <div style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", overflow: "hidden" }}>
+          <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "14px", overflow: "hidden" }}>
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", minWidth: "560px" }}>
                 <thead>
-                  <tr style={{ background: "rgba(255,255,255,0.02)" }}>
+                  <tr style={{ background: "var(--hover-bg-soft)" }}>
                     {["Title", "Author", "ISBN", "Year", "Status", ...(isAdmin ? ["Actions"] : [])].map(h => (
-                      <th key={h} style={{ textAlign: "left", padding: "12px 14px", fontSize: "10.5px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1.2px", borderBottom: "1px solid rgba(255,255,255,0.07)", fontWeight: 600 }}>{h}</th>
+                      <th key={h} style={{ textAlign: "left", padding: "12px 14px", fontSize: "10.5px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1.2px", borderBottom: "1px solid var(--border)", fontWeight: 600 }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {loading ? <TableSkeleton /> : books.length === 0 ? (
-                    <tr><td colSpan={isAdmin ? 6 : 5} style={{ padding: "60px 12px", textAlign: "center", color: "#5a5f78" }}>
+                    <tr><td colSpan={isAdmin ? 6 : 5} style={{ padding: "60px 12px", textAlign: "center", color: "var(--text-dim)" }}>
                       No books found{search ? ` for "${search}"` : ""}.</td></tr>
                   ) : books.map((book: any) => (
                     <tr key={book._id} className="table-row">
-                      <td style={{ padding: "13px 14px", color: "#f0ece4", fontWeight: 500, borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.title}</td>
-                      <td style={{ padding: "13px 14px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.author?.name || book.author || "—"}</td>
-                      <td style={{ padding: "13px 14px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.isbn || "—"}</td>
-                      <td style={{ padding: "13px 14px", color: "#8a8fa8", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>{book.publishedYear || "—"}</td>
-                      <td style={{ padding: "13px 14px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                      <td style={{ padding: "13px 14px", color: "var(--text)", fontWeight: 500, borderBottom: "1px solid var(--hover-bg)" }}>{book.title}</td>
+                      <td style={{ padding: "13px 14px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.author?.name || book.author || "—"}</td>
+                      <td style={{ padding: "13px 14px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.isbn || "—"}</td>
+                      <td style={{ padding: "13px 14px", color: "var(--text-muted)", borderBottom: "1px solid var(--hover-bg)" }}>{book.publishedYear || "—"}</td>
+                      <td style={{ padding: "13px 14px", borderBottom: "1px solid var(--hover-bg)" }}>
                         <span style={{ padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: 600, background: book.isBorrowed ? "rgba(90,141,238,0.12)" : "rgba(76,175,130,0.12)", color: book.isBorrowed ? "#5a8dee" : "#4caf82" }}>
                           {book.isBorrowed ? "Borrowed" : "Available"}
                         </span>
                       </td>
                       {isAdmin && (
-                        <td style={{ padding: "13px 14px", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                        <td style={{ padding: "13px 14px", borderBottom: "1px solid var(--hover-bg)" }}>
                           <button className="btn-danger" onClick={() => setConfirmDelete({ id: book._id, title: book.title })}
                             style={{ background: "none", border: "1px solid rgba(224,85,85,0.25)", color: "#e05555", padding: "4px 12px", borderRadius: "7px", fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>
                             Delete
@@ -430,14 +430,14 @@ export default function BooksPage() {
             </div>
 
             {/* Pagination */}
-            <div style={{ display: "flex", gap: "8px", padding: "14px 16px", justifyContent: "flex-end", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+            <div style={{ display: "flex", gap: "8px", padding: "14px 16px", justifyContent: "flex-end", alignItems: "center", borderTop: "1px solid var(--hover-bg)" }}>
               <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="btn-secondary"
-                style={{ background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)", color: page === 1 ? "#3a3f52" : "#8a8fa8", padding: "6px 14px", borderRadius: "7px", fontFamily: "inherit", fontSize: "13px" }}>
+                style={{ background: "var(--surface2)", border: "1px solid var(--border)", color: page === 1 ? "var(--text-disabled)" : "var(--text-muted)", padding: "6px 14px", borderRadius: "7px", fontFamily: "inherit", fontSize: "13px" }}>
                 ← Prev
               </button>
-              <span style={{ padding: "6px 10px", fontSize: "13px", color: "#5a5f78" }}>Page {page}</span>
+              <span style={{ padding: "6px 10px", fontSize: "13px", color: "var(--text-dim)" }}>Page {page}</span>
               <button onClick={() => setPage(p => p + 1)} disabled={books.length < 10} className="btn-secondary"
-                style={{ background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)", color: books.length < 10 ? "#3a3f52" : "#8a8fa8", padding: "6px 14px", borderRadius: "7px", fontFamily: "inherit", fontSize: "13px" }}>
+                style={{ background: "var(--surface2)", border: "1px solid var(--border)", color: books.length < 10 ? "var(--text-disabled)" : "var(--text-muted)", padding: "6px 14px", borderRadius: "7px", fontFamily: "inherit", fontSize: "13px" }}>
                 Next →
               </button>
             </div>
@@ -449,11 +449,11 @@ export default function BooksPage() {
       {showModal && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.72)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100, backdropFilter: "blur(4px)", padding: "20px" }}
           onClick={() => setShowModal(false)}>
-          <div className="anim-scale-in modal-inner" style={{ background: "#14171f", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "18px", width: "460px", maxWidth: "100%" }}
+          <div className="anim-scale-in modal-inner" style={{ background: "var(--surface)", border: "1px solid var(--border-hover)", borderRadius: "18px", width: "460px", maxWidth: "100%" }}
             onClick={(e) => e.stopPropagation()}>
-            <div style={{ padding: "22px 26px 16px", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h2 style={{ fontSize: "19px", color: "#f0ece4" }}>Add New Book</h2>
-              <button onClick={() => setShowModal(false)} style={{ background: "none", border: "none", color: "#5a5f78", cursor: "pointer", fontSize: "20px", lineHeight: 1 }}>✕</button>
+            <div style={{ padding: "22px 26px 16px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <h2 style={{ fontSize: "19px", color: "var(--text)" }}>Add New Book</h2>
+              <button onClick={() => setShowModal(false)} style={{ background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", fontSize: "20px", lineHeight: 1 }}>✕</button>
             </div>
             <div style={{ padding: "20px 26px" }}>
               {formError && (
@@ -467,7 +467,7 @@ export default function BooksPage() {
                 { label: "Published Year", key: "publishedYear", placeholder: "e.g. 1958", required: false, type: "number" },
               ].map(({ label, key, placeholder, required, type }) => (
                 <div key={key} style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>
+                  <label style={{ display: "block", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>
                     {label} {required && <span style={{ color: "#e05555" }}>*</span>}
                   </label>
                   <input type={type || "text"} placeholder={placeholder} value={(form as any)[key]}
@@ -475,7 +475,7 @@ export default function BooksPage() {
                 </div>
               ))}
               <div style={{ marginBottom: "16px" }}>
-                <label style={{ display: "block", fontSize: "11px", color: "#5a5f78", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>
+                <label style={{ display: "block", fontSize: "11px", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "7px", fontWeight: 600 }}>
                   Author <span style={{ color: "#e05555" }}>*</span>
                 </label>
                 <SearchSelect options={authors} value={form.author}
@@ -483,11 +483,11 @@ export default function BooksPage() {
                   placeholder="Search for an author..." loading={authorsLoading} />
               </div>
             </div>
-            <div style={{ padding: "14px 26px 22px", borderTop: "1px solid rgba(255,255,255,0.07)", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+            <div style={{ padding: "14px 26px 22px", borderTop: "1px solid var(--border)", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
               <button onClick={() => setShowModal(false)} className="btn-secondary"
-                style={{ background: "#1c202c", border: "1px solid rgba(255,255,255,0.07)", color: "#8a8fa8", padding: "9px 18px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", fontWeight: 500 }}>Cancel</button>
+                style={{ background: "var(--surface2)", border: "1px solid var(--border)", color: "var(--text-muted)", padding: "9px 18px", borderRadius: "9px", fontFamily: "inherit", fontSize: "13px", fontWeight: 500 }}>Cancel</button>
               <button onClick={handleAdd} disabled={submitting} className="btn-primary"
-                style={{ background: "#c8a96e", color: "#0f1117", padding: "9px 22px", borderRadius: "9px", border: "none", fontFamily: "inherit", fontSize: "13px", fontWeight: 700, opacity: submitting ? 0.7 : 1 }}>
+                style={{ background: "#c8a96e", color: "var(--bg)", padding: "9px 22px", borderRadius: "9px", border: "none", fontFamily: "inherit", fontSize: "13px", fontWeight: 700, opacity: submitting ? 0.7 : 1 }}>
                 {submitting ? "Saving..." : "Save Book"}
               </button>
             </div>

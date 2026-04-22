@@ -29,8 +29,8 @@ export default function Topbar({ title, subtitle, onAdd, addLabel = "+ Add New" 
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
-        background: "#0f1117",
+        borderBottom: "1px solid var(--border)",
+        background: "var(--bg)",
         flexShrink: 0,
         gap: "12px",
       }}>
@@ -39,16 +39,16 @@ export default function Topbar({ title, subtitle, onAdd, addLabel = "+ Add New" 
           <h1 style={{
             fontFamily: "serif",
             fontSize: isMobile ? "20px" : "22px",
-            color: "#f0ece4",
+            color: "var(--text)",
             whiteSpace: "nowrap",
           }}>
             {title}
           </h1>
           {subtitle && !isMobile && (
             <span style={{
-              fontSize: "12px", color: "#5a5f78",
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              fontSize: "12px", color: "var(--text-dim)",
+              background: "var(--hover-bg)",
+              border: "1px solid var(--border)",
               padding: "2px 10px", borderRadius: "20px",
             }}>
               {subtitle}
@@ -94,7 +94,7 @@ export default function Topbar({ title, subtitle, onAdd, addLabel = "+ Add New" 
                 fontSize: "13px",
                 fontWeight: 600,
                 background: "#c8a96e",
-                color: "#0f1117",
+                color: "var(--bg)",
                 border: "none",
                 cursor: "pointer",
                 fontFamily: "inherit",
@@ -120,7 +120,7 @@ export default function Topbar({ title, subtitle, onAdd, addLabel = "+ Add New" 
             height: "54px",
             borderRadius: "50%",
             background: "#c8a96e",
-            color: "#0f1117",
+            color: "var(--bg)",
             border: "none",
             cursor: "pointer",
             display: "flex",

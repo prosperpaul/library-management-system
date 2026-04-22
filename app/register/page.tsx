@@ -25,7 +25,7 @@ function checkPassword(password: string): PasswordStrength {
 
 function StrengthRule({ passed, label }: { passed: boolean; label: string }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "7px", fontSize: "11.5px", color: passed ? "#4caf82" : "#5a5f78", transition: "color 0.2s" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: "7px", fontSize: "11.5px", color: passed ? "#4caf82" : "var(--text-dim)", transition: "color 0.2s" }}>
       <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
         {passed
           ? <polyline points="20 6 9 17 4 12"/>
@@ -52,14 +52,14 @@ function EyeIcon({ open }: { open: boolean }) {
 }
 
 const inputStyle: React.CSSProperties = {
-  width: "100%", background: "#1c202c",
-  border: "1px solid rgba(255,255,255,0.07)", borderRadius: "8px",
-  padding: "10px 12px", color: "#f0ece4", fontSize: "14px",
+  width: "100%", background: "var(--surface2)",
+  border: "1px solid var(--border)", borderRadius: "8px",
+  padding: "10px 12px", color: "var(--text)", fontSize: "14px",
   outline: "none", fontFamily: "inherit", boxSizing: "border-box",
 };
 
 const labelStyle: React.CSSProperties = {
-  display: "block", fontSize: "11px", color: "#5a5f78",
+  display: "block", fontSize: "11px", color: "var(--text-dim)",
   textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px", fontWeight: 600,
 };
 
@@ -107,12 +107,12 @@ export default function RegisterPage() {
     <main style={{
       display: "flex", alignItems: "center", justifyContent: "center",
       minHeight: "100vh", padding: "20px",
-      background: "#0f1117",
-      backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)",
+      background: "var(--bg)",
+      backgroundImage: "radial-gradient(circle at 1px 1px, var(--hover-bg) 1px, transparent 0)",
       backgroundSize: "28px 28px",
     }}>
       <div className="anim-fade-up" style={{
-        background: "#14171f", border: "1px solid rgba(255,255,255,0.08)",
+        background: "var(--surface)", border: "1px solid var(--border)",
         borderRadius: "20px", padding: "40px 36px", width: "420px", maxWidth: "100%",
         boxShadow: "0 24px 64px rgba(0,0,0,0.4)",
       }}>
@@ -124,7 +124,7 @@ export default function RegisterPage() {
             </svg>
           </div>
           <div style={{ fontFamily: "serif", fontSize: "26px", color: "#c8a96e", letterSpacing: "0.5px" }}>LibraryOS</div>
-          <div style={{ fontSize: "13px", color: "#5a5f78", marginTop: "4px" }}>Create your account</div>
+          <div style={{ fontSize: "13px", color: "var(--text-dim)", marginTop: "4px" }}>Create your account</div>
         </div>
 
         {error && (
@@ -162,14 +162,14 @@ export default function RegisterPage() {
             />
             <button
               onClick={() => setShowPassword(s => !s)}
-              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#5a5f78", cursor: "pointer", padding: "2px", display: "flex", alignItems: "center" }}
+              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", padding: "2px", display: "flex", alignItems: "center" }}
             >
               <EyeIcon open={showPassword} />
             </button>
           </div>
 
           {form.password.length > 0 && (
-            <div style={{ marginTop: "10px", background: "#1c202c", borderRadius: "8px", padding: "12px 14px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "7px" }}>
+            <div style={{ marginTop: "10px", background: "var(--surface2)", borderRadius: "8px", padding: "12px 14px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "7px" }}>
               <StrengthRule passed={strength.hasLength} label="8+ characters" />
               <StrengthRule passed={strength.hasUpper} label="Uppercase letter" />
               <StrengthRule passed={strength.hasLower} label="Lowercase letter" />
@@ -190,12 +190,12 @@ export default function RegisterPage() {
                 paddingRight: "46px",
                 borderColor: form.confirmPassword
                   ? passwordsMatch ? "rgba(76,175,130,0.45)" : "rgba(224,85,85,0.45)"
-                  : "rgba(255,255,255,0.07)",
+                  : "var(--border)",
               }}
             />
             <button
               onClick={() => setShowConfirmPassword(s => !s)}
-              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "#5a5f78", cursor: "pointer", padding: "2px", display: "flex", alignItems: "center" }}
+              style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: "var(--text-dim)", cursor: "pointer", padding: "2px", display: "flex", alignItems: "center" }}
             >
               <EyeIcon open={showConfirmPassword} />
             </button>
@@ -215,8 +215,8 @@ export default function RegisterPage() {
           className="btn-primary"
           style={{
             width: "100%", padding: "12px",
-            background: canSubmit ? "#c8a96e" : "#2a2d3a",
-            color: canSubmit ? "#0f1117" : "#5a5f78",
+            background: canSubmit ? "#c8a96e" : "var(--surface3)",
+            color: canSubmit ? "var(--bg)" : "var(--text-dim)",
             border: "none", borderRadius: "10px", fontSize: "15px",
             fontWeight: 700, cursor: canSubmit ? "pointer" : "not-allowed",
             fontFamily: "inherit", transition: "all 0.2s",
@@ -226,7 +226,7 @@ export default function RegisterPage() {
           {loading ? "Creating account..." : "Create Account →"}
         </button>
 
-        <p style={{ textAlign: "center", fontSize: "13px", color: "#5a5f78", marginTop: "22px" }}>
+        <p style={{ textAlign: "center", fontSize: "13px", color: "var(--text-dim)", marginTop: "22px" }}>
           Already have an account?{" "}
           <Link href="/login" style={{ color: "#c8a96e", textDecoration: "none", fontWeight: 500 }}>Sign in</Link>
         </p>

@@ -31,8 +31,8 @@ export default function ConfirmModal({
       <div
         className="anim-scale-in modal-inner"
         style={{
-          background: "#14171f",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "var(--surface)",
+          border: "1px solid var(--border-hover)",
           borderRadius: "18px",
           width: "380px",
           padding: "32px 28px 26px",
@@ -58,8 +58,8 @@ export default function ConfirmModal({
           )}
         </div>
 
-        <h3 style={{ fontSize: "18px", color: "#f0ece4", marginBottom: "10px" }}>{title}</h3>
-        <p style={{ fontSize: "14px", color: "#8a8fa8", lineHeight: 1.65, marginBottom: "28px" }}>{message}</p>
+        <h3 style={{ fontSize: "18px", color: "var(--text)", marginBottom: "10px" }}>{title}</h3>
+        <p style={{ fontSize: "14px", color: "var(--text-muted)", lineHeight: 1.65, marginBottom: "28px" }}>{message}</p>
 
         <div style={{ display: "flex", gap: "10px" }}>
           <button
@@ -67,8 +67,8 @@ export default function ConfirmModal({
             className="btn-secondary"
             style={{
               flex: 1, padding: "10px",
-              background: "#1c202c", border: "1px solid rgba(255,255,255,0.08)",
-              color: "#8a8fa8", borderRadius: "10px",
+              background: "var(--surface2)", border: "1px solid var(--border)",
+              color: "var(--text-muted)", borderRadius: "10px",
               fontFamily: "inherit", fontSize: "13px", fontWeight: 500,
             }}
           >
