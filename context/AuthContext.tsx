@@ -54,8 +54,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return null;
       }
       return data.message || "Invalid credentials";
-    } catch {
-      return "Could not connect to server";
+    } catch (e: any) {
+      if (e instanceof TypeError) {
+        return "Could not connect to server";
+      }
+      return e.message || "Login failed";
     }
   };
 
